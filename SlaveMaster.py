@@ -1,8 +1,11 @@
-"""
-Written by Josh Benson and Pratik Gupta
-            CopyWrite 2019
-"""
 
+#      ******************************************************************
+#      *                                                                *
+#      *                 Header file for SlaveMaster.py                 *
+#      *                                                                *
+#      *           Copyright (c) Pratik Gupta and Josh Benson           *
+#      *                                                                *
+#      ******************************************************************
 from serial import Serial
 from threading import Thread
 from time import time, sleep
