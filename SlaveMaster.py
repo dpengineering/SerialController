@@ -1,3 +1,8 @@
+"""
+Written by Josh Benson and Pratik Gupta
+            CopyWrite 2019
+"""
+
 from serial import Serial
 from threading import Thread
 from time import time, sleep
