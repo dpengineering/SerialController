@@ -17,6 +17,7 @@ Func sayHi;
 Callable callables[] = {
   {"say_hi", sayHi},
   {"add", add},
+  {"blinkLED", functionThatTurnsOnLED}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);

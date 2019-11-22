@@ -51,7 +51,7 @@ typedef struct callable {
 
 Func numberOfCallables;
 Func getNthCallable;
-Func echo;
+Func echo;pe
 Func _pinMode;
 Func _digitalWrite;
 Func _digitalRead;
