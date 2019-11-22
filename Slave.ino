@@ -6,10 +6,13 @@ waitTime = 100
 
 void setup() {
   serialSlave.open(9600, ADDRESS, 40);
+    stepper1.connectToPort(6);
+  stepper1.setSpeedInStepsPerSecond(500);
+  stepper1.setAccelerationInStepsPerSecondPerSecond(500);
 }
 
 void loop() {
-    functionThatTurnsOnLED(500)
+    moveStepper(dLegnth, dArray)
 }
 
 Func sayHi;
@@ -26,6 +29,15 @@ Callable callables[] = {
 //};
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
+
+void moveStepper(byte dataLength, byte *dataArray) {
+
+  byte stepper = dataArray[0];
+  int steps = ((int *) (dataArray + 2))[0];
+
+  if (dataArray[1] == 1) {
+    steps *= -1;
+  }
 
 //Example that returns the sum of some data (%256)
 void add(byte dataLength, byte *dataArray) {

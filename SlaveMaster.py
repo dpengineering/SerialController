@@ -9,8 +9,8 @@
 from serial import Serial
 from threading import Thread
 from time import time, sleep
-from SerialMaster import SerialMaster
-from SerialMaster import Arduino
+from pidev.SlaveMaster import SerialMaster
+from pidev.SlaveMaster import Arduino
 ADDRESS = 15
 
 # create connection
@@ -63,7 +63,7 @@ checksum
 """
 
 
-class SerialMaster:
+class SlaveMaster:
     def __init__(self, port="/dev/ttyS0", baud=115200):
         self.port = Serial(port=port, baudrate=baud, timeout=MASTER_COMMAND_TIMEOUT_PERIOD_S)
         self.port.set_input_flow_control(True)
