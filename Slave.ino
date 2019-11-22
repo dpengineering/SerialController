@@ -1,32 +1,42 @@
 #include "SerialSlave.h"
+#include "SpeedyStepper.h"
 
-#define ADDRESS 15
+#define ADDRESS 17
 
-waitTime = 100
+SpeedyStepper stepper1;
+SpeedyStepper stepper2;
+
+bool running1;
+bool running2;
 
 void setup() {
-  serialSlave.open(9600, ADDRESS, 40);
-    stepper1.connectToPort(6);
+  serialSlave.open(115200, ADDRESS, 40);
+
+  stepper1.connectToPort(8);
   stepper1.setSpeedInStepsPerSecond(500);
   stepper1.setAccelerationInStepsPerSecondPerSecond(500);
 }
 
 void loop() {
-    moveStepper(dLegnth, dArray)
+
+  if (stepper1.processMovement() && running1) {
+    stepper1.disableStepper();
+    running1 = false;
+  }
+
+  if (stepper2.processMovement() && running1) {
+    stepper2.disableStepper();
+    running2 = false;
+  }
 }
 
-Func sayHi;
+Func moveStepper;
+Func stopStepper;
 
 Callable callables[] = {
-  {"say_hi", sayHi},
-  {"add", add},
-  {"blinkLED", functionThatTurnsOnLED}
+  {"move_stepper", moveStepper},
+  {"disable", disable},
 };
-
-//Callable callables[] = {
-//Your callables Here
-//{"short_name", functiontoRunOnTheArduino}
-//};
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 
@@ -39,30 +49,25 @@ void moveStepper(byte dataLength, byte *dataArray) {
     steps *= -1;
   }
 
-//Example that returns the sum of some data (%256)
-void add(byte dataLength, byte *dataArray) {
-  byte sum = 0;
-  for(byte i = 0; i < dataLength; i++){
-    sum += dataArray[i];
+  switch (stepper) {
+    case 1:
+      stepper1.enableStepper();
+      stepper1.setupRelativeMoveInSteps(steps);
+      break;
+    case 2:
+      stepper2.enableStepper();
+      stepper2.setupRelativeMoveInSteps(steps);
+      break;
   }
-  returns(sum);
+
+  running1 = true;
+  running2 = true;
+
+  returns("Moving Stepper");
+
+
 }
 
-//Example that returns a string
-void sayHi(byte dataLength, byte *dataArray) {
-  returns("I can say hi!"); n
-}
-
-
-void functionThatTurnsOnLED(int blinkCount) {
-    for (byte count = 0; count< blinkCount; count++) {
-
-        digitalWrite(8, HIGH)
-        print("LED On")
-        delay(waitTime)
-        digitalWrite(8, LOW)
-        print("LED Off")
-        delay(waitTime)
-    }
-
+void disable(byte dataLength, byte *dataArray) {
+  stepper1.disableStepper();
 }
