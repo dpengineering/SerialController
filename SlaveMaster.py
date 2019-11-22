@@ -11,12 +11,13 @@ from threading import Thread
 from time import time, sleep
 from SerialMaster import SerialMaster
 from SerialMaster import Arduino
+ADDRESS = 15
 
 # create connection
 arduino = Arduino(SerialMaster(), ADDRESS)
 
 # test the connection
-print(arduino.echo("Working!!", format_out-FORMAT_STRING))
+print(arduino.echo("Working!!"))
 
 M_MASTER_COMMAND_MAX_DATA_BYTES = 64
 M_SLAVE_RESPONSE_MAX_DATA_BYTES = 64
