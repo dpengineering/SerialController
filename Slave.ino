@@ -20,6 +20,11 @@ Callable callables[] = {
   {"blinkLED", functionThatTurnsOnLED}
 };
 
+//Callable callables[] = {
+//Your callables Here
+//{"short_name", functiontoRunOnTheArduino}
+//};
+
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 
 //Example that returns the sum of some data (%256)
