@@ -3,7 +3,7 @@
 #      *                                                                *
 #      *                 Header file for SlaveMaster.py                 *
 #      *                                                                *
-#      *           Copyright (c) Pratik Gupta and Josh Benson           *
+#      *           Copyright (c) Josh Benson and Pratik Gupta           *
 #      *                                                                *
 #      ******************************************************************
 from serial import Serial
