@@ -9,6 +9,9 @@
 from serial import Serial
 from threading import Thread
 from time import time, sleep
+from SerialMaster import SerialMaster, Arduino
+
+# create connection
 
 M_MASTER_COMMAND_MAX_DATA_BYTES = 64
 M_SLAVE_RESPONSE_MAX_DATA_BYTES = 64

@@ -2,12 +2,14 @@
 
 #define ADDRESS 15
 
+waitTime = 100
+
 void setup() {
   serialSlave.open(9600, ADDRESS, 40);
 }
 
 void loop() {
-  
+    functionThatTurnsOnLED(500)
 }
 
 Func sayHi;
@@ -30,5 +32,19 @@ void add(byte dataLength, byte *dataArray) {
 
 //Example that returns a string
 void sayHi(byte dataLength, byte *dataArray) {
-  returns("I can say hi!");
+  returns("I can say hi!"); n
+}
+
+
+void functionThatTurnsOnLED(int blinkCount) {
+    for (byte count = 0; count< blinkCount; count++) {
+
+        digitalWrite(8, HIGH)
+        print("LED On")
+        delay(waitTime)
+        digitalWrite(8, LOW)
+        print("LED Off")
+        delay(waitTime)
+    }
+
 }
