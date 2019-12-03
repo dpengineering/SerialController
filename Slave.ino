@@ -12,7 +12,7 @@ bool running2;
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
 
-  stepper1.connectToPort(8);
+  stepper1.connectToPort(1);
   stepper1.setSpeedInStepsPerSecond(500);
   stepper1.setAccelerationInStepsPerSecondPerSecond(500);
 }
@@ -52,14 +52,14 @@ void moveStepper(byte dataLength, byte *dataArray) {
   switch (stepper) {
     case 1:
       stepper1.enableStepper();
-      stepper1.moveRelativeInSteps(steps);
+      stepper1.setupRelativeMoveInSteps(steps);
       break;
     case 2:
       stepper2.enableStepper();
-      stepper2.moveRelativeInSteps(steps);
+      stepper2.setupRelativeMoveInSteps(steps);
       break;
   }
-
+//setupRelativeMoveInSteps
   running1 = true;
   running2 = true;
 
