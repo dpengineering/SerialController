@@ -52,11 +52,11 @@ void moveStepper(byte dataLength, byte *dataArray) {
   switch (stepper) {
     case 1:
       stepper1.enableStepper();
-      stepper1.setupRelativeMoveInSteps(steps);
+      stepper1.moveRelativeInSteps(steps);
       break;
     case 2:
       stepper2.enableStepper();
-      stepper2.setupRelativeMoveInSteps(steps);
+      stepper2.moveRelativeInSteps(steps);
       break;
   }
 
