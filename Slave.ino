@@ -12,6 +12,7 @@ bool running2;
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
 
+
   stepper1.connectToPort(1);
   stepper1.setSpeedInStepsPerSecond(500);
   stepper1.setAccelerationInStepsPerSecondPerSecond(500);
