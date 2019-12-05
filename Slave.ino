@@ -45,7 +45,7 @@ void moveStepper(byte dataLength, byte *dataArray) {
   pinMode(23, OUTPUT);
   digitalWrite(23, HIGH);
   delay(50000);
-  digitalWrite(23, LOW);cd
+  digitalWrite(23, LOW);
 
 
   byte stepper = dataArray[0];
