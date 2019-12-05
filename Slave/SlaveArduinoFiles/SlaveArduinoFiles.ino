@@ -12,7 +12,7 @@ bool running2;
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
 
-  stepper1.connectToPort(1);
+  stepper1.connectToPort(1 );
   stepper1.setSpeedInStepsPerSecond(500);
   stepper1.setAccelerationInStepsPerSecondPerSecond(500);
 }
@@ -41,6 +41,11 @@ Callable callables[] = {
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 
 void moveStepper(byte dataLength, byte *dataArray) {
+  
+  pinMode(23, OUTPUT);
+  digitalWrite(23, HIGH);
+  delay(50000);
+  digitalWrite(23, LOW);
 
   byte stepper = dataArray[0];
   int steps = ((int *) (dataArray + 2))[0];
@@ -59,7 +64,7 @@ void moveStepper(byte dataLength, byte *dataArray) {
       stepper2.setupRelativeMoveInSteps(steps);
       break;
   }
-//setupRelativeMoveInSteps
+
   running1 = true;
   running2 = true;
 
