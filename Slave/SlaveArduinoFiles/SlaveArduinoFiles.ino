@@ -12,7 +12,7 @@ bool running2;
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
 
-  stepper1.connectToPort(1 );
+  stepper1.connectToPort(2);
   stepper1.setSpeedInStepsPerSecond(500);
   stepper1.setAccelerationInStepsPerSecondPerSecond(500);
 }
@@ -28,6 +28,10 @@ void loop() {
     stepper2.disableStepper();
     running2 = false;
   }
+  if (running2 == false && running1 == false) {
+
+    blinkLED(0, 0);
+  }
 }
 
 Func moveStepper;
@@ -36,16 +40,12 @@ Func stopStepper;
 Callable callables[] = {
   {"move_stepper", moveStepper},
   {"disable", disable},
+  {"blinkLED", blinkLED}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 
 void moveStepper(byte dataLength, byte *dataArray) {
-  
-  pinMode(23, OUTPUT);
-  digitalWrite(23, HIGH);
-  delay(50000);
-  digitalWrite(23, LOW);
 
   byte stepper = dataArray[0];
   int steps = ((int *) (dataArray + 2))[0];
@@ -70,7 +70,16 @@ void moveStepper(byte dataLength, byte *dataArray) {
 
   returns("Moving Stepper");
 
+//setupRelativeMoveInSteps
+}
 
+void blinkLED(byte dataLength, byte *dataArray) {
+  
+  pinMode(23, OUTPUT);
+  digitalWrite(23, HIGH);
+  delay(200);
+  digitalWrite(23, LOW);
+  
 }
 
 void disable(byte dataLength, byte *dataArray) {
