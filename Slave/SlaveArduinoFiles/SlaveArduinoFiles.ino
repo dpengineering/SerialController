@@ -6,15 +6,23 @@
 SpeedyStepper stepper1;
 SpeedyStepper stepper2;
 
-bool running1;
-bool running2;
+bool LED = false;
+bool running1 = false;
+bool running2 = false;
 
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
+  Serial.begin(9600);
 
-  stepper1.connectToPort(2);
+  stepper1.connectToPort(1);
   stepper1.setSpeedInStepsPerSecond(500);
   stepper1.setAccelerationInStepsPerSecondPerSecond(500);
+
+  stepper2.connectToPort(2);
+  stepper2.setSpeedInStepsPerSecond(500);
+  stepper2.setAccelerationInStepsPerSecondPerSecond(500);
+
+
 }
 
 void loop() {
@@ -28,10 +36,12 @@ void loop() {
     stepper2.disableStepper();
     running2 = false;
   }
-  if (running2 == false && running1 == false) {
 
-    blinkLED(0, 0);
-  }
+  //if (running2 == false && running1 == false && LED == false) {
+  //  blinkLED(0, 0);
+    
+  //}
+
 }
 
 Func moveStepper;
@@ -74,12 +84,20 @@ void moveStepper(byte dataLength, byte *dataArray) {
 }
 
 void blinkLED(byte dataLength, byte *dataArray) {
+
+  byte LEDPin = dataArray[0];
+  byte waitTime = dataArray[1];
   
-  pinMode(23, OUTPUT);
-  digitalWrite(23, HIGH);
-  delay(200);
-  digitalWrite(23, LOW);
-  
+  pinMode(LEDPin, OUTPUT);
+  digitalWrite(LEDPin, HIGH);
+  Serial.print("LED On");
+  delay(waitTime * 30);
+  digitalWrite(LEDPin, LOW);
+  Serial.print("LED Off");
+  delay(waitTime);
+
+  LED = true;
+
 }
 
 void disable(byte dataLength, byte *dataArray) {
