@@ -19,14 +19,13 @@ def release_candy():
     print(a.move_stepper([2, 0] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
     time.sleep(3)
 
-    print(a.blinkLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.turnOnLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
     time.sleep(1)
-    print(a.blinkLED([24, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.turnOnLED([24, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
     time.sleep(1)
-    print(a.blinkLED([25, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.turnOnLED([25, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
     time.sleep(1)
-    print(a.blinkLED([26, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.turnOnLED([26, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
     time.sleep(1)
-
 
 release_candy()

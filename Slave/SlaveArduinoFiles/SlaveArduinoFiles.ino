@@ -100,6 +100,16 @@ void blinkLED(byte dataLength, byte *dataArray) {
 
 }
 
+void turnOnLED(byte dataLength, byte *dataArray) {
+
+  byte LEDPin = dataArray[0];
+  byte waitTime = dataArray[1];
+
+  pinMode(LEDPin, OUTPUT);
+  digitalWrite(LEDPin, HIGH);
+  Serial.print("LED On");
+}
+
 void disable(byte dataLength, byte *dataArray) {
   stepper1.disableStepper();
 }
