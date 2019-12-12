@@ -39,7 +39,7 @@ void loop() {
 
   //if (running2 == false && running1 == false && LED == false) {
   //  blinkLED(0, 0);
-    
+
   //}
 
 }
@@ -74,7 +74,7 @@ void moveStepper(byte dataLength, byte *dataArray) {
       stepper2.setupRelativeMoveInSteps(steps);
       break;
   }
-
+//setupRelativeMoveInSteps
   running1 = true;
   running2 = true;
 
@@ -87,7 +87,7 @@ void blinkLED(byte dataLength, byte *dataArray) {
 
   byte LEDPin = dataArray[0];
   byte waitTime = dataArray[1];
-  
+
   pinMode(LEDPin, OUTPUT);
   digitalWrite(LEDPin, HIGH);
   Serial.print("LED On");
@@ -98,16 +98,6 @@ void blinkLED(byte dataLength, byte *dataArray) {
 
   LED = true;
 
-}
-
-void turnOnLED(byte dataLength, byte *dataArray) {
-
-  byte LEDPin = dataArray[0];
-  byte waitTime = dataArray[1];
-
-  pinMode(LEDPin, OUTPUT);
-  digitalWrite(LEDPin, HIGH);
-  Serial.print("LED On");
 }
 
 void disable(byte dataLength, byte *dataArray) {
