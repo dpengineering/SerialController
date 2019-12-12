@@ -12,7 +12,7 @@ FORMAT_BYTE = 1
 FORMAT_STRING = 2
 NO_RESPONSE = 3
 
-def release_candy():
+def run_arduinos():
     print(a.move_stepper([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
     time.sleep(3)
     print(a.move_stepper([1, 0] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
@@ -24,4 +24,4 @@ def release_candy():
     time.sleep(.5)
 
 
-release_candy()
+run_arduinos()
