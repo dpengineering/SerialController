@@ -2,8 +2,11 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Remote Python 3.5 (sftp://pi@widget04-pi.local:22/usr/bin/python3.5)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Remote Python 3.5.3 (sftp://pi@widget04-pi.local:22/usr/bin/python3.5)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="module" module-name="SpeedyStepper" />
+=======
+>>>>>>> f49e9b4e735bf470c81181bb3449ac972a1e02ca
   </component>
 </module>
