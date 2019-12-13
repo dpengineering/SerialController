@@ -71,7 +71,7 @@ void moveStepper(byte dataLength, byte *dataArray) {
       break;
     case 2:
       stepper2.enableStepper();
-      stepper2.setupRelativeMoveInSteps(steps);
+      stepper2.setupRelativeMoveInSteps(steps):
       break;
   }
 //setupRelativeMoveInSteps
