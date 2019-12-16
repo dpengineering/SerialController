@@ -1,4 +1,6 @@
 #include "SpeedyStepper.h"
+#include "SpeedyStepper.cpp"
+
 SpeedyStepper stepper1;
 
 void setup() {
