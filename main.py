@@ -26,9 +26,5 @@ def run_arduinos():
     time.sleep(.5)
 
 
-    #print(b.blinkLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    #time.sleep(1)
-    #print(b.blinkLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    #time.sleep(1)
 
 run_arduinos()

@@ -50,7 +50,8 @@ Func stopStepper;
 Callable callables[] = {
   {"move_stepper", moveStepper},
   {"disable", disable},
-  {"blinkLED", blinkLED}
+  {"blinkLED", blinkLED},
+  {"toggleLED", toggleLED},
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
@@ -99,6 +100,28 @@ void blinkLED(byte dataLength, byte *dataArray) {
   LED = true;
 
 }
+
+void toggleLED(byte dataLength, byte *dataArray) {
+
+  byte LEDPin = dataArray[0];
+  byte switchState = dataArray[1];
+
+  pinMode(LEDPin, OUTPUT);
+  if (switchState == 0)
+  {
+    digitalWrite(LEDPin, LOW);
+  }
+  else if (switchState == 1)
+  {
+    digitalWrite(LEDPin, LOW);
+  }
+  else
+  {
+    print("LED switch state must be 0 or 1. This is the second value in dataArray")
+  }
+
+
+
 
 void disable(byte dataLength, byte *dataArray) {
   stepper1.disableStepper();
