@@ -13,11 +13,6 @@ void setup() {
 }
 // lol this is to test git hub
 void loop() {
-      int steps = 10
-      stepper1.enableStepper();
-      stepper1.setusetpRelativeMoveInSteps(steps);
-      while(!stepper1.motionComplete())
-     {
-        stepper1.processMovement();
-     }
+  stepper1.moveRelativeInSteps(-200);
+
 }
