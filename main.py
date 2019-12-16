@@ -1,3 +1,11 @@
+#      ******************************************************************
+#      *                                                                *
+#      *                 Header file for main.py                        *
+#      *                                                                *
+#      *           Copyright (c) Josh Benson and Pratik Gupta           *
+#      *                                                                *
+#      ******************************************************************
+
 from pidev.SlaveMaster import SerialMaster, Arduino
 from pidev import RPiMIB
 import time

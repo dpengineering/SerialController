@@ -1,10 +1,21 @@
+//      ******************************************************************
+//      *                                                                *
+//      *                 Header file for Slave.ino                      *
+//      *                                                                *
+//      *           Copyright (c) Josh Benson and Pratik Gupta           *
+//      *                                                                *
+//      ******************************************************************
+
 #include "SerialSlave.h"
 #include "SpeedyStepper.h"
+#include "RCServo.h"
 
 #define ADDRESS 17
 
 SpeedyStepper stepper1;
 SpeedyStepper stepper2;
+RCServo lowerServo;
+RCServo upperServo;
 
 bool LED = false;
 bool running1 = false;
@@ -21,6 +32,11 @@ void setup() {
   stepper2.connectToPort(2);
   stepper2.setSpeedInStepsPerSecond(500);
   stepper2.setAccelerationInStepsPerSecondPerSecond(500);
+
+  LOWER_SERVO_PIN = 11;
+  UPPER_SERVO_PIN = 12;
+  lowerServo.connectToPin(LOWER_SERVO_PIN);
+  upperServo.connectToPin(UPPER_SERVO_PIN);
 
 
 }
@@ -52,6 +68,7 @@ Callable callables[] = {
   {"disable", disable},
   {"blinkLED", blinkLED},
   {"toggleLED", toggleLED},
+  {"set_servo_position", setServoPosition}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
@@ -60,7 +77,6 @@ void moveStepper(byte dataLength, byte *dataArray) {
 
   byte stepper = dataArray[0];
   int steps = ((int *) (dataArray + 2))[0];
-
   if (dataArray[1] == 1) {
     steps *= -1;
   }
@@ -121,7 +137,22 @@ void toggleLED(byte dataLength, byte *dataArray) {
   }
 
 
+void setServoPosition(byte dataLength, byte *dataArray) {
 
+  byte servo = dataArray[0];
+  byte pos = dataArray[1];
+  }
+
+  switch (servo) {
+    case 1:
+//      void RCServo::connectToPin(byte pinNumber)
+      lowerServo.setServoPosition(servoPosition);
+      break;
+    case 2:
+//      void RCServo::connectToPin(byte pinNumber)
+      upperServo.setServoPosition(servoPosition);
+      break;
+  }
 
 void disable(byte dataLength, byte *dataArray) {
   stepper1.disableStepper();

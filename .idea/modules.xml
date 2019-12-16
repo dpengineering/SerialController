@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Arduino/libraries/RCServo/.idea/RCServo.iml" filepath="$USER_HOME$/Arduino/libraries/RCServo/.idea/RCServo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SerialController.iml" filepath="$PROJECT_DIR$/.idea/SerialController.iml" />
       <module fileurl="file://$USER_HOME$/Arduino/libraries/SpeedyStepper/.idea/SpeedyStepper.iml" filepath="$USER_HOME$/Arduino/libraries/SpeedyStepper/.idea/SpeedyStepper.iml" />
     </modules>

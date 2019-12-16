@@ -6,6 +6,7 @@
 #      *           Copyright (c) Josh Benson and Pratik Gupta           *
 #      *                                                                *
 #      ******************************************************************
+
 from serial import Serial
 from threading import Thread
 from time import time, sleep
