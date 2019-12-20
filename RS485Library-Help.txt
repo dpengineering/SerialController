@@ -1,0 +1,24 @@
+//      ******************************************************************
+//      *                                                                *
+//      *          Header file for RS485Library-Help.txt                 *
+//      *                                                                *
+//      *              Copyright (c) Josh Benson DPEA                    *
+//      *                                                                *
+//      ******************************************************************
+
+Notes:
+
+This fle is to help you use the RS485 library.
+    Using main.py you can:
+        -add multiple slave Arduino boards
+        -call from a wide range of pre written callables
+        -run different methods that call from the callable list to unlock complete hardware control
+
+
+As of right now the working callables include:
+    move_stepper
+    blinkLED
+    toggleLED
+    disable
+
+
