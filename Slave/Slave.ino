@@ -8,7 +8,6 @@
 
 #include "SerialSlave.h"
 #include "SpeedyStepper.h"
-#include "RCServo.h"
 
 #define ADDRESS 17
 
