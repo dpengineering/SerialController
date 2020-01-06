@@ -13,10 +13,19 @@ void setup() {
   stepper2.setSpeedInStepsPerSecond(500);
   stepper2.setAccelerationInStepsPerSecondPerSecond(500);
 
+  testStepper();
+
 }
 
 void loop() {
 
+
+  
+}
+
+
+void testStepper() {
+  
   stepper1.setupRelativeMoveInSteps(1000);
   stepper2.setupRelativeMoveInSteps(1000);
   while((!stepper1.motionComplete()) || (!stepper2.motionComplete()))
@@ -24,5 +33,5 @@ void loop() {
   stepper1.processMovement();
   stepper2.processMovement();
  }
-  
+
 }
