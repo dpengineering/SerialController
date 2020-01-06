@@ -63,7 +63,7 @@ Callable callables[] = {
   {"blinkLED", blinkLED},
   {"toggleLED", toggleLED},
 /*   {"set_servo_position", setServoPosition} */
-  {"moveStepperMany", moveStepperMany}
+ // {"moveStepperMany", moveStepperMany}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
