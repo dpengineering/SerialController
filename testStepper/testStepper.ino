@@ -14,6 +14,7 @@ void setup() {
   stepper2.setAccelerationInStepsPerSecondPerSecond(500);
 
   testStepper();
+  disable();
 
 }
 
@@ -34,4 +35,11 @@ void testStepper() {
   stepper2.processMovement();
  }
 
+}
+
+void disable() {
+
+  stepper1.disableStepper();
+  stepper2.disableStepper();
+  
 }
