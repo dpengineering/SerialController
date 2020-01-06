@@ -49,10 +49,13 @@ void loop() {
 
   //}
 
+
+
 }
 
-Func moveStepper;
-Func stopStepper;
+  Func moveStepper;
+  Func stopStepper;
+
 
 Callable callables[] = {
   {"moveStepper", moveStepper},
@@ -87,7 +90,7 @@ void moveStepper(byte dataLength, byte *dataArray) {
   running1 = true;
   running2 = true;
 
-  returns("Moving Stepper");
+  return("Moving Stepper");
 
 //setupRelativeMoveInSteps
 }
@@ -125,10 +128,10 @@ void toggleLED(byte dataLength, byte *dataArray) {
   }
   else
   {
-    print("LED switch state must be 0 or 1. This is the second value in dataArray")
+    Serial.print("LED switch state must be 0 or 1. This is the second value in dataArray");
   }
 
-
+}
 /* void setServoPosition(byte dataLength, byte *dataArray) {
 
   byte servo = dataArray[0];
@@ -148,4 +151,5 @@ void toggleLED(byte dataLength, byte *dataArray) {
 
 void disable(byte dataLength, byte *dataArray) {
   stepper1.disableStepper();
+  stepper2.disableStepper();
 }
