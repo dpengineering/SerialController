@@ -14,8 +14,6 @@
 
 SpeedyStepper stepper1;
 SpeedyStepper stepper2;
-RCServo lowerServo;
-RCServo upperServo;
 
 bool LED = false;
 bool running1 = false;
@@ -32,12 +30,6 @@ void setup() {
   stepper2.connectToPort(2);
   stepper2.setSpeedInStepsPerSecond(500);
   stepper2.setAccelerationInStepsPerSecondPerSecond(500);
-
-  LOWER_SERVO_PIN = 11;
-  UPPER_SERVO_PIN = 12;
-  lowerServo.connectToPin(LOWER_SERVO_PIN);
-  upperServo.connectToPin(UPPER_SERVO_PIN);
-
 
 }
 
