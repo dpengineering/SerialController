@@ -16,7 +16,7 @@ This fle is to help you use the RS485 library.
 
 
 As of right now the working callables include:
-    move_stepper
+    moveStepper
     blinkLED
     toggleLED
     disable
