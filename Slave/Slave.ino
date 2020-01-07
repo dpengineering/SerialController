@@ -44,12 +44,6 @@ void loop() {
     running2 = false;
   }
 
-  //if (running2 == false && running1 == false && LED == false) {
-  //  blinkLED(0, 0);
-
-  //}
-
-
 
 }
 
@@ -62,8 +56,7 @@ Callable callables[] = {
   {"disable", disable},
   {"blinkLED", blinkLED},
   {"toggleLED", toggleLED},
-/*   {"set_servo_position", setServoPosition} */
- // {"moveStepperMany", moveStepperMany}
+  {"moveStepperPosition", moveStepperPosition}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
@@ -132,24 +125,19 @@ void toggleLED(byte dataLength, byte *dataArray) {
   }
 
 }
-/* void setServoPosition(byte dataLength, byte *dataArray) {
 
-  byte servo = dataArray[0];
-  byte pos = dataArray[1];
-  }
-
-  switch (servo) {
-    case 1:
-//      void RCServo::connectToPin(byte pinNumber)
-      lowerServo.setServoPosition(servoPosition);
-      break;
-    case 2:
-//      void RCServo::connectToPin(byte pinNumber)
-      upperServo.setServoPosition(servoPosition);
-      break;
-  } */
 
 void disable(byte dataLength, byte *dataArray) {
   stepper1.disableStepper();
   stepper2.disableStepper();
+}
+
+
+void moveMultiSteppers(byte dataLength, byte *dataArray) {
+
+  byte stepper = dataArray[0];
+  int steps = ((int *) (dataArray + 2))[0];
+
+  
+  
 }
