@@ -2,7 +2,7 @@
 //      *                                                                *
 //      *                 Header file for Slave.ino                      *
 //      *                                                                *
-//      *           Copyright (c) Josh Benson and Pratik Gupta           *
+//      *                 Copyright (c) Josh Benson                      *
 //      *                                                                *
 //      ******************************************************************
 
@@ -17,6 +17,7 @@ SpeedyStepper stepper2;
 bool LED = false;
 bool running1 = false;
 bool running2 = false;
+double stepSetting = .25;
 
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
@@ -56,7 +57,9 @@ Callable callables[] = {
   {"disable", disable},
   {"blinkLED", blinkLED},
   {"toggleLED", toggleLED},
-  {"moveStepperPosition", moveStepperPosition}
+  {"moveStepperPosition", moveStepperPosition},
+  {"moveStepperDegrees", moveStepperDegrees},
+  {"setStepperSpeed", setStepperSpeed}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
@@ -79,13 +82,11 @@ void moveStepper(byte dataLength, byte *dataArray) {
       stepper2.setupRelativeMoveInSteps(steps);
       break;
   }
-//setupRelativeMoveInSteps
   running1 = true;
   running2 = true;
 
   return("Moving Stepper");
 
-//setupRelativeMoveInSteps
 }
 
 void blinkLED(byte dataLength, byte *dataArray) {
@@ -133,11 +134,80 @@ void disable(byte dataLength, byte *dataArray) {
 }
 
 
-void moveMultiSteppers(byte dataLength, byte *dataArray) {
+void moveStepperDegrees(byte dataLength, byte *dataArray) {
+  
+  byte stepper = dataArray[0];
+  int speed = ((int *) (dataArray + 2))[0];
+}
 
   byte stepper = dataArray[0];
-  int steps = ((int *) (dataArray + 2))[0];
+  int deg = ((int *) (dataArray + 2))[0];
+  double stepsPerDeg = (200*(1/stepperSetting))/(360);
+  int steps = (int) (stepsPerDeg*deg)
+  if (dataArray[1] == 1) {
+    steps *= -1;
+  }
 
   
-  
+  switch (stepper) {
+    case 1:
+      stepper1.enableStepper();
+      stepper1.setupRelativeMoveInSteps(steps);
+      break;
+    case 2:
+      stepper2.enableStepper();
+      stepper2.setupRelativeMoveInSteps(steps);
+      break;
+  }
+  running1 = true;
+  running2 = true;
+
+  return("Moving Stepper Degrees");
+
 }
+void setStepperSpeed(byte dataLength, byte *dataArray) {
+  int speedStepper = ((int *) (dataArray + 2))[0];
+  byte stepper = dataArray[0];
+  
+  switch (stepper) {
+    case 1:
+      stepper1.setSpeedInStepsPerSecond(speedStepper);
+      break;
+    case 2:
+      stepper1.setSpeedInStepsPerSecond(speedStepper);
+      break;
+  }
+}
+
+void moveStepperPosition(byte dataLength, byte *dataArray) {
+
+  byte stepper = dataArray[0];
+  int steps;
+  int cuurentPosSteps = ((int *) (dataArray + 2))[0];
+  int finalPosSteps = ((int *) (dataArray + 3))[0];
+  bool longways = False;
+  if (dataArray[1] == 1) {
+    longways = True;
+  }
+
+    steps = currentPos-finalPosSteps
+    steps = finalPosSteps-currentPosSteps
+    
+
+  switch (stepper) {
+    case 1:
+      stepper1.enableStepper();
+      stepper1.setupRelativeMoveInSteps(steps);
+      break;
+    case 2:
+      stepper2.enableStepper();
+      stepper2.setupRelativeMoveInSteps(steps);
+      break;
+  }
+  running1 = true;
+  running2 = true;
+
+  return("Moving Stepper Position");
+
+}
+  
