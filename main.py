@@ -24,7 +24,7 @@ NO_RESPONSE = 3
 def run_arduinos():
     print(a.moveStepper([1, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
    # time.sleep(.1)
-    print(a.moveStepper([2, 0] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepper([2, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
     time.sleep(3)
     print(a.moveStepper([2, 0] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
     time.sleep(3)

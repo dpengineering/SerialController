@@ -37,14 +37,10 @@ Create an Arduino Object:
 
 a = Arduino(SerialMaster(baud=115200), 17)
 
-The line above declares 'a' as an Arduino Object, at port 17. Each Arduino will have its own
-
-And some formatting code:
-
-FORMAT_LIST = 0
-FORMAT_BYTE = 1
-FORMAT_STRING = 2
-NO_RESPONSE = 3
+The line above declares 'a' as an Arduino Object, at port 17.
+Each Arduino will have its own name (in this case, 'a'), and its own port, in this case '17'
+The port is declared at the top of the Arduino file, with '#define ADDRESS 17'
+(The port is arbitrary)
 
 
 void moveStepper(byte dataLength, byte *dataArray) {
@@ -53,8 +49,20 @@ void moveStepper(byte dataLength, byte *dataArray) {
 
     print(a.moveStepper([1, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
+    The first parameter determines the port of the motor (i.e. 1, 2...)
 
+    The second parameter determines the direction of the stepper.
+        '0' is ClockWise and '1' is CounterClockWise
+
+    The '200' in the list to bytes section of the code is the steps.
+    The stepper needs 800 steps in order to make a full revolution, when it is in the quarter step setting.
+    The step setting can be changed on the Arduino Board, and should be updated in the code.
+    For example, in the full step mode, 200 steps will result in a revolution.
+
+    The 'a' at the beginning of the call is the Arduino Object.
 
 }
+
+
 
 
