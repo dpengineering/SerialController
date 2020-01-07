@@ -21,4 +21,40 @@ As of right now the working callables include:
     toggleLED
     disable
 
+At the top of the main.py file, do a few things
+
+Do the following import lines:
+
+from pidev.SlaveMaster import SerialMaster, Arduino
+from pidev import RPiMIB
+import time
+
+And open the path:
+
+RPiMIB.openSPI()
+
+Create an Arduino Object:
+
+a = Arduino(SerialMaster(baud=115200), 17)
+
+The line above declares 'a' as an Arduino Object, at port 17. Each Arduino will have its own
+
+And some formatting code:
+
+FORMAT_LIST = 0
+FORMAT_BYTE = 1
+FORMAT_STRING = 2
+NO_RESPONSE = 3
+
+
+void moveStepper(byte dataLength, byte *dataArray) {
+
+    An example of how to call the function in the py file would be:
+
+    print(a.moveStepper([1, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+
+
+}
+
 
