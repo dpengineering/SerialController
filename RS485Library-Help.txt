@@ -45,6 +45,11 @@ The port is declared at the top of the Arduino file, with '#define ADDRESS 17'
 
 void moveStepper(byte dataLength, byte *dataArray) {
 
+    Description: Basic function to move stepper an amount of steps in a direction.
+    (Use setSpeed to set the stepper speed)
+
+    How to use:
+
     An example of how to call the function in the py file would be:
 
     print(a.moveStepper([1, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
@@ -60,6 +65,36 @@ void moveStepper(byte dataLength, byte *dataArray) {
     For example, in the full step mode, 200 steps will result in a revolution.
 
     The 'a' at the beginning of the call is the Arduino Object.
+
+}
+
+void disable(byte dataLength, byte *dataArray) {
+
+Description: Frees the stepper motor. This prevents overheating!
+
+How to use:
+
+An example of how to call the function in the py file would be:
+
+print(a.disable([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+The disable function takes two parameters, and then does nothing with them.
+Feel free to put anything for the parameters! (Any integer between 0 and 255)
+
+}
+
+void blinkLED(byte dataLength, byte *dataArray) {
+
+    Description: Blinks an LED at a specified port with a specified wait time
+
+    How to use:
+
+    An example of how to call the function in the py file would be:
+
+    print(a.blinkLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    The first parameter is the pin number, and the second parameter is the waitTime.
+
 
 }
 
