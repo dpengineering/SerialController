@@ -17,7 +17,7 @@ SpeedyStepper stepper2;
 bool LED = false;
 bool running1 = false;
 bool running2 = false;
-double stepSetting = .25;
+double stepperSetting = .25;
 
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
@@ -136,10 +136,10 @@ void disable(byte dataLength, byte *dataArray) {
 
 void moveStepperDegrees(byte dataLength, byte *dataArray) {
   
-
+  byte stepper = dataArray[0];
   int deg = ((int *) (dataArray + 2))[0];
   double stepsPerDeg = (200*(1/stepperSetting))/(360);
-  int steps = (int) (stepsPerDeg*deg)
+  int steps = (int) (stepsPerDeg*deg);
   if (dataArray[1] == 1) {
     steps *= -1;
   }
@@ -178,17 +178,40 @@ void setStepperSpeed(byte dataLength, byte *dataArray) {
 void moveStepperPosition(byte dataLength, byte *dataArray) {
 
   byte stepper = dataArray[0];
+  int steps1;
+  int steps2;
   int steps;
-  int cuurentPosSteps = ((int *) (dataArray + 2))[0];
+  int currentPosSteps = ((int *) (dataArray + 2))[0];
   int finalPosSteps = ((int *) (dataArray + 3))[0];
-  bool longways = False;
+  bool longways = false;
   if (dataArray[1] == 1) {
-    longways = True;
+    longways = true;
   }
 
-    steps = currentPos-finalPosSteps
-    steps = finalPosSteps-currentPosSteps
-    
+  steps1 = currentPosSteps-finalPosSteps;
+  steps2 = finalPosSteps-currentPosSteps;
+  if(longways = true)
+  {
+      if((abs(steps1))>(abs(steps2)))
+      {
+        steps = steps1;
+      }
+      else
+      {
+        steps = steps2;
+      }
+  }
+  else
+  {
+    if((abs(steps1))>(abs(steps2)))
+      {
+        steps = steps2;
+      }
+      else
+      {
+        steps = steps1;
+      }
+  }
 
   switch (stepper) {
     case 1:
