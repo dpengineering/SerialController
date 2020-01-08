@@ -136,11 +136,7 @@ void disable(byte dataLength, byte *dataArray) {
 
 void moveStepperDegrees(byte dataLength, byte *dataArray) {
   
-  byte stepper = dataArray[0];
-  int speed = ((int *) (dataArray + 2))[0];
-}
 
-  byte stepper = dataArray[0];
   int deg = ((int *) (dataArray + 2))[0];
   double stepsPerDeg = (200*(1/stepperSetting))/(360);
   int steps = (int) (stepsPerDeg*deg)
