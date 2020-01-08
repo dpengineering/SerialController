@@ -55,7 +55,7 @@ void moveStepper(byte dataLength, byte *dataArray) {
         '0' is ClockWise and '1' is CounterClockWise
 
     The '200' in the list to bytes section of the code is the steps.
-    The stepper needs 800 steps in order to make a full revolution, when it is in the quarter step setting.
+    The stepper needs 800 steps in order to make a full revolution, when it is  in the quarter step setting.
     The step setting can be changed on the Arduino Board, and should be updated in the code.
     For example, in the full step mode, 200 steps will result in a revolution.
 
