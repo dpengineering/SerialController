@@ -58,7 +58,8 @@ Callable callables[] = {
   {"blinkLED", blinkLED},
   {"toggleLED", toggleLED},
   {"moveStepperToPos", moveStepperToPos},
-  {"moveStepperToDeg", moveStepperToDeg},
+  {"moveStepperDeg", moveStepperDeg},
+  {"moveStepperRev", moveStepperRev},
   {"setStepperSpeed", setStepperSpeed}
 };
 
@@ -134,7 +135,7 @@ void disable(byte dataLength, byte *dataArray) {
 }
 
 
-void moveStepperToDeg(byte dataLength, byte *dataArray) {
+void moveStepperDeg(byte dataLength, byte *dataArray) {
   
   byte stepper = dataArray[0];
   int deg = ((int *) (dataArray + 2))[0];
@@ -161,6 +162,35 @@ void moveStepperToDeg(byte dataLength, byte *dataArray) {
   return("Moving Stepper Degrees");
 
 }
+
+void moveStepperRev(byte dataLength, byte *dataArray) {
+  
+  byte stepper = dataArray[0];
+  int rev = ((int *) (dataArray + 2))[0];
+  double stepsPerRev = 200*(1/stepperSetting);
+  int steps = (int) (stepsPerRev*rev);
+  if (dataArray[1] == 1) {
+    steps *= -1;
+  }
+
+  
+  switch (stepper) {
+    case 1:
+      stepper1.enableStepper();
+      stepper1.setupRelativeMoveInSteps(steps);
+      break;
+    case 2:
+      stepper2.enableStepper();
+      stepper2.setupRelativeMoveInSteps(steps);
+      break;
+  }
+  running1 = true;
+  running2 = true;
+
+  return("Moving Stepper Revolutions");
+
+}
+
 void setStepperSpeed(byte dataLength, byte *dataArray) {
   int speedStepper = ((int *) (dataArray + 2))[0];
   byte stepper = dataArray[0];
