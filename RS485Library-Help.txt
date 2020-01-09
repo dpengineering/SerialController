@@ -95,6 +95,16 @@ void blinkLED(byte dataLength, byte *dataArray) {
 
     The first parameter is the pin number, and the second parameter is the waitTime.
 
+}
+
+void toggleLED(byte dataLength, byte *dataArray) {
+
+    Description:
+
+}
+
+void setStepperSpeed(byte dataLength, byte *dataArray) {
+
 
 }
 

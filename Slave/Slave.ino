@@ -57,8 +57,8 @@ Callable callables[] = {
   {"disable", disable},
   {"blinkLED", blinkLED},
   {"toggleLED", toggleLED},
-  {"moveStepperPosition", moveStepperPosition},
-  {"moveStepperDegrees", moveStepperDegrees},
+  {"moveStepperToPos", moveStepperToPos},
+  {"moveStepperToDeg", moveStepperToDeg},
   {"setStepperSpeed", setStepperSpeed}
 };
 
@@ -134,7 +134,7 @@ void disable(byte dataLength, byte *dataArray) {
 }
 
 
-void moveStepperDegrees(byte dataLength, byte *dataArray) {
+void moveStepperToDeg(byte dataLength, byte *dataArray) {
   
   byte stepper = dataArray[0];
   int deg = ((int *) (dataArray + 2))[0];
@@ -175,7 +175,7 @@ void setStepperSpeed(byte dataLength, byte *dataArray) {
   }
 }
 
-void moveStepperPosition(byte dataLength, byte *dataArray) {
+void moveStepperToPos(byte dataLength, byte *dataArray) {
 
   byte stepper = dataArray[0];
   int steps1;
