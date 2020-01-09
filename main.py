@@ -33,9 +33,7 @@ def run_arduinos():
 
     #   time.sleep(1)
 
-    print(a.moveStepperToDeg([2, 0] + list((360).to_bytes(2, "little")), format_out=FORMAT_STRING))
-
-    print(a.moveStepperToPos([2, 0] + list((360).to_bytes(2, "little") + list((360).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperDeg([2, 0] + list((360).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     #  print(a.blinkLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  time.sleep(.5)
@@ -44,7 +42,7 @@ def run_arduinos():
 
     time.sleep(5)
 
-    print(a.disable([55, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.disable(format_out=FORMAT_STRING))
 
 
 run_arduinos()
