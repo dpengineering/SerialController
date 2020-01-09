@@ -55,7 +55,7 @@ void loop() {
 Callable callables[] = {
   {"moveStepper", moveStepper},
   {"disable", disable},
-  {"disable", disableWhenDone},
+  {"disableWhenDone", disableWhenDone},
   {"blinkLED", blinkLED},
   {"toggleLED", toggleLED},
   {"moveStepperToPos", moveStepperToPos},
