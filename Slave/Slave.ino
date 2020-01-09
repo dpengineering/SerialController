@@ -55,7 +55,6 @@ void loop() {
 Callable callables[] = {
   {"moveStepper", moveStepper},
   {"disable", disable},
-  {"disable", disableWhenDone},
   {"blinkLED", blinkLED},
   {"toggleLED", toggleLED},
   {"moveStepperToPos", moveStepperToPos},
@@ -133,20 +132,6 @@ void toggleLED(byte dataLength, byte *dataArray) {
 void disable() {
   stepper1.disableStepper();
   stepper2.disableStepper();
-}
-
-void disableWhenDone() {
-  
-  if (running1==false && running2==false)
-  {
-  stepper1.disableStepper();
-  stepper2.disableStepper();
-  }
-  else
-  {
-    delay(2000);
-    disableWhenDone();
-  }
 }
 
 
