@@ -214,13 +214,14 @@ void moveStepperToPos(byte dataLength, byte *dataArray) {
   int currentPosSteps = ((int *) (dataArray + 2))[0];
   int finalPosSteps = ((int *) (dataArray + 3))[0];
   bool longways = false;
+  
   if (dataArray[1] == 1) {
     longways = true;
   }
 
-  steps1 = currentPosSteps-finalPosSteps;
-  steps2 = finalPosSteps-currentPosSteps;
-  if(longways = true)
+  steps1 = currentPosSteps - finalPosSteps;
+  steps2 = finalPosSteps - currentPosSteps;
+  if(longways == true)
   {
       if((abs(steps1))>(abs(steps2)))
       {
