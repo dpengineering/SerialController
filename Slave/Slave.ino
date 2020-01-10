@@ -8,6 +8,7 @@
 
 #include "SerialSlave.h"
 #include "SpeedyStepper.h"
+#include "SpeedyStepper.cpp"
 
 #define ADDRESS 17
 
@@ -211,8 +212,8 @@ void moveStepperToPos(byte dataLength, byte *dataArray) {
   int steps1;
   int steps2;
   int steps;
-  int currentPosSteps = ((int *) (dataArray + 2))[0];
-  int finalPosSteps = ((int *) (dataArray + 3))[0];
+  int currentPosSteps = getCurrentPositionInSteps()
+  int finalPosSteps = ((int *) (dataArray + 2))[0];
   bool longways = false;
   
   if (dataArray[1] == 1) {
