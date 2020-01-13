@@ -14,10 +14,18 @@
 
 SpeedyStepper stepper1;
 SpeedyStepper stepper2;
+SpeedyStepper stepper3;
+SpeedyStepper stepper4;
+SpeedyStepper stepper5;
+SpeedyStepper stepper6;
 
 bool LED = false;
 bool running1 = false;
 bool running2 = false;
+bool running3 = false;
+bool running4 = false;
+bool running5 = false;
+bool running6 = false;
 double stepperSetting = .25;
 
 void setup() {
@@ -31,6 +39,23 @@ void setup() {
   stepper2.connectToPort(2);
   stepper2.setSpeedInStepsPerSecond(500);
   stepper2.setAccelerationInStepsPerSecondPerSecond(500);
+
+  stepper3.connectToPort(3);
+  stepper3.setSpeedInStepsPerSecond(500);
+  stepper3.setAccelerationInStepsPerSecondPerSecond(500);
+
+  stepper4.connectToPort(4);
+  stepper4.setSpeedInStepsPerSecond(500);
+  stepper4.setAccelerationInStepsPerSecondPerSecond(500);
+
+  stepper5.connectToPort(5);
+  stepper5.setSpeedInStepsPerSecond(500);
+  stepper5.setAccelerationInStepsPerSecondPerSecond(500);
+
+  stepper6.connectToPort(6);
+  stepper6.setSpeedInStepsPerSecond(500);
+  stepper6.setAccelerationInStepsPerSecondPerSecond(500);
+
 
 }
 
@@ -46,7 +71,25 @@ void loop() {
     running2 = false;
   }
 
+  if (stepper3.processMovement() && running1) {
+    stepper3.disableStepper();
+    running3 = false;
+  }
 
+  if (stepper4.processMovement() && running1) {
+    stepper4.disableStepper();
+    running4 = false;
+  }
+
+  if (stepper5.processMovement() && running1) {
+    stepper5.disableStepper();
+    running5 = false;
+  }
+
+  if (stepper6.processMovement() && running1) {
+    stepper6.disableStepper();
+    running6 = false;
+  }
 }
 
   Func moveStepper;
@@ -78,14 +121,32 @@ void moveStepper(byte dataLength, byte *dataArray) {
     case 1:
       stepper1.enableStepper();
       stepper1.setupRelativeMoveInSteps(steps);
+      running1 = true;
       break;
     case 2:
       stepper2.enableStepper();
       stepper2.setupRelativeMoveInSteps(steps);
+      running2 = true;
+    case 3:
+      stepper3.enableStepper();
+      stepper3.setupRelativeMoveInSteps(steps);
+      running3 = true;
+      break;
+    case 4:
+      stepper4.enableStepper();
+      stepper4.setupRelativeMoveInSteps(steps);
+      running4 = true;
+    case 5:
+      stepper5.enableStepper();
+      stepper5.setupRelativeMoveInSteps(steps);
+      running5 = true;
+      break;
+    case 6:
+      stepper6.enableStepper();
+      stepper6.setupRelativeMoveInSteps(steps);
+      running6 = true;
       break;
   }
-  running1 = true;
-  running2 = true;
 
   return("Moving Stepper");
 
@@ -133,6 +194,10 @@ void toggleLED(byte dataLength, byte *dataArray) {
 void disable() {
   stepper1.disableStepper();
   stepper2.disableStepper();
+  stepper3.disableStepper();
+  stepper4.disableStepper();
+  stepper5.disableStepper();
+  stepper6.disableStepper();
 }
 
 
@@ -151,14 +216,32 @@ void moveStepperDeg(byte dataLength, byte *dataArray) {
     case 1:
       stepper1.enableStepper();
       stepper1.setupRelativeMoveInSteps(steps);
+      running1 = true;
       break;
     case 2:
       stepper2.enableStepper();
       stepper2.setupRelativeMoveInSteps(steps);
+      running2 = true;
+    case 3:
+      stepper3.enableStepper();
+      stepper3.setupRelativeMoveInSteps(steps);
+      running3 = true;
+      break;
+    case 4:
+      stepper4.enableStepper();
+      stepper4.setupRelativeMoveInSteps(steps);
+      running4 = true;
+    case 5:
+      stepper5.enableStepper();
+      stepper5.setupRelativeMoveInSteps(steps);
+      running5 = true;
+      break;
+    case 6:
+      stepper6.enableStepper();
+      stepper6.setupRelativeMoveInSteps(steps);
+      running6 = true;
       break;
   }
-  running1 = true;
-  running2 = true;
 
   return("Moving Stepper Degrees");
 
@@ -174,19 +257,36 @@ void moveStepperRev(byte dataLength, byte *dataArray) {
     steps *= -1;
   }
 
-  
   switch (stepper) {
     case 1:
       stepper1.enableStepper();
       stepper1.setupRelativeMoveInSteps(steps);
+      running1 = true;
       break;
     case 2:
       stepper2.enableStepper();
       stepper2.setupRelativeMoveInSteps(steps);
+      running2 = true;
+    case 3:
+      stepper3.enableStepper();
+      stepper3.setupRelativeMoveInSteps(steps);
+      running3 = true;
+      break;
+    case 4:
+      stepper4.enableStepper();
+      stepper4.setupRelativeMoveInSteps(steps);
+      running4 = true;
+    case 5:
+      stepper5.enableStepper();
+      stepper5.setupRelativeMoveInSteps(steps);
+      running5 = true;
+      break;
+    case 6:
+      stepper6.enableStepper();
+      stepper6.setupRelativeMoveInSteps(steps);
+      running6 = true;
       break;
   }
-  running1 = true;
-  running2 = true;
 
   return("Moving Stepper Revolutions");
 
@@ -201,7 +301,19 @@ void setStepperSpeed(byte dataLength, byte *dataArray) {
       stepper1.setSpeedInStepsPerSecond(speedStepper);
       break;
     case 2:
-      stepper1.setSpeedInStepsPerSecond(speedStepper);
+      stepper2.setSpeedInStepsPerSecond(speedStepper);
+      break;
+    case 3:
+      stepper3.setSpeedInStepsPerSecond(speedStepper);
+      break;
+    case 4:
+      stepper4.setSpeedInStepsPerSecond(speedStepper);
+      break;
+    case 5:
+      stepper5.setSpeedInStepsPerSecond(speedStepper);
+      break;
+    case 6:
+      stepper6.setSpeedInStepsPerSecond(speedStepper);
       break;
   }
 }
@@ -212,7 +324,27 @@ void moveStepperToPos(byte dataLength, byte *dataArray) {
   int steps1;
   int steps2;
   int steps;
-  int currentPosSteps = getCurrentPositionInSteps()
+  int currentPosSteps;
+  switch (stepper) {
+    case 1:
+      currentPosSteps = stepper1.getCurrentPositionInSteps();
+      break;
+    case 2:
+      currentPosSteps = stepper2.getCurrentPositionInSteps();
+      break;
+    case 3:
+      currentPosSteps = stepper3.getCurrentPositionInSteps();
+      break;
+    case 4:
+      currentPosSteps = stepper4.getCurrentPositionInSteps();
+      break;
+    case 5:
+      currentPosSteps = stepper5.getCurrentPositionInSteps();
+      break;
+    case 6:
+      currentPosSteps = stepper6.getCurrentPositionInSteps();
+      break;
+  }
   int finalPosSteps = ((int *) (dataArray + 2))[0];
   bool longways = false;
   
@@ -249,14 +381,32 @@ void moveStepperToPos(byte dataLength, byte *dataArray) {
     case 1:
       stepper1.enableStepper();
       stepper1.setupRelativeMoveInSteps(steps);
+      running1 = true;
       break;
     case 2:
       stepper2.enableStepper();
       stepper2.setupRelativeMoveInSteps(steps);
+      running2 = true;
+    case 3:
+      stepper3.enableStepper();
+      stepper3.setupRelativeMoveInSteps(steps);
+      running3 = true;
+      break;
+    case 4:
+      stepper4.enableStepper();
+      stepper4.setupRelativeMoveInSteps(steps);
+      running4 = true;
+    case 5:
+      stepper5.enableStepper();
+      stepper5.setupRelativeMoveInSteps(steps);
+      running5 = true;
+      break;
+    case 6:
+      stepper6.enableStepper();
+      stepper6.setupRelativeMoveInSteps(steps);
+      running6 = true;
       break;
   }
-  running1 = true;
-  running2 = true;
 
   return("Moving Stepper Position");
 
