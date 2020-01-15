@@ -24,21 +24,13 @@ NO_RESPONSE = 3
 def run_arduinos():
     print(a.setStepperSpeed([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
-    #   print(a.moveStepper([1, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
+       print(a.moveStepperToPos([1, 0] + list((200).to_bytes(2, "little"))+ list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  time.sleep(.1)
     #  print(a.moveStepper([2, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   time.sleep(3)
     #   print(a.moveStepper([2, 0] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   time.sleep(3)
 
-    #   time.sleep(1)
-
-    print(a.moveStepperDeg([2, 0] + list((360).to_bytes(2, "little")), format_out=FORMAT_STRING))
-
-    #  print(a.blinkLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    #  time.sleep(.5)
-    #  print(a.blinkLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    #  time.sleep(.5)
 
     time.sleep(5)
 
