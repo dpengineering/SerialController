@@ -344,6 +344,9 @@ void moveStepperToPos(byte dataLength, byte *dataArray) {
     case 6:
       currentPosSteps = stepper6.getCurrentPositionInSteps();
       break;
+
+      Serial.print (currentPosSteps);
+      Serial.println ("Current Position");
   }
   int finalPosSteps = ((int *) (dataArray + 2))[0];
   bool longways = false;
