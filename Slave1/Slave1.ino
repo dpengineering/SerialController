@@ -105,7 +105,7 @@ Callable callables[] = {
   {"moveStepperDeg", moveStepperDeg},
   {"moveStepperRev", moveStepperRev},
   {"setStepperSpeed", setStepperSpeed},
-  {"setStepperAcceleration", moveStepperRev}
+  {"setStepperAcceleration", setStepperAcceleration}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);

@@ -105,7 +105,7 @@ Callable callables[] = {
   {"moveStepperDeg", moveStepperDeg},
   {"moveStepperRev", moveStepperRev},
   {"setStepperSpeed", setStepperSpeed},
-  {"setStepperAcceleration", moveStepperRev}
+  {"setStepperAccel", setStepperAccel}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
@@ -319,7 +319,7 @@ void setStepperSpeed(byte dataLength, byte *dataArray) {
   }
 }
 
-void setStepperAcceleration(byte dataLength, byte *dataArray) {
+void setStepperAccel(byte dataLength, byte *dataArray) {
   int accelStepper = ((int *) (dataArray + 2))[0];
   byte stepper = dataArray[0];
   
