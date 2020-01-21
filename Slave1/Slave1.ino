@@ -27,6 +27,7 @@ bool running4 = false;
 bool running5 = false;
 bool running6 = false;
 double stepperSetting = .25;
+int speedSetting = 500;
 
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
@@ -104,8 +105,9 @@ Callable callables[] = {
   {"moveStepperToPos", moveStepperToPos},
   {"moveStepperDeg", moveStepperDeg},
   {"moveStepperRev", moveStepperRev},
+  {"moveStepperHome", moveStepperHome},
   {"setStepperSpeed", setStepperSpeed},
-  {"setStepperAcceleration", moveStepperRev}
+  {"setStepperAcceleration", setStepperAcceleration}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
@@ -296,6 +298,7 @@ void moveStepperRev(byte dataLength, byte *dataArray) {
 void setStepperSpeed(byte dataLength, byte *dataArray) {
   int speedStepper = ((int *) (dataArray + 2))[0];
   byte stepper = dataArray[0];
+  speedSetting = speedStepper;
   
   switch (stepper) {
     case 1:
@@ -318,6 +321,41 @@ void setStepperSpeed(byte dataLength, byte *dataArray) {
       break;
   }
 }
+
+
+void moveStepperHome(byte dataLength, byte *dataArray) {
+  int switchPin = ((int *) (dataArray + 2))[0];
+  byte stepper = dataArray[0];
+  long maxDistance = 10000;
+  long dir = dataArray[1];
+  float spd = (float)speedSetting;
+  if (dir = 0)
+    dir = -1;
+  
+  switch (stepper) {
+    case 1:
+      stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 2:
+      stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 3:
+      stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 4:
+      stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 5:
+      stepper5.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 6:
+      stepper6.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+  }
+}
+
+
+  
 
 void setStepperAcceleration(byte dataLength, byte *dataArray) {
   int accelStepper = ((int *) (dataArray + 2))[0];
@@ -371,9 +409,6 @@ void moveStepperToPos(byte dataLength, byte *dataArray) {
     case 6:
       currentPosSteps = stepper6.getCurrentPositionInSteps();
       break;
-
-      Serial.print (currentPosSteps);
-      Serial.println ("Current Position");
   }
   int finalPosSteps = ((int *) (dataArray + 2))[0];
   bool longways = false;
