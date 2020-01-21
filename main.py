@@ -24,15 +24,15 @@ NO_RESPONSE = 3
 def run_arduinos():
     print(a.setStepperSpeed([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
-    print(a.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    print(a.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    print(a.moveStepperRev([3, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    print(a.moveStepperRev([4, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    #   print(a.moveStepperRev([5, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperToPos([1, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperToPos([2, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperToPos([3, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperToPos([4, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperToPos([5, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   print(a.moveStepperRev([6, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
-    print(b.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    print(b.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    #  print(b.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    #   print(b.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     #  time.sleep(.1)
     #  print(a.moveStepper([2, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
