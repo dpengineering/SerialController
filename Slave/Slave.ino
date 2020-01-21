@@ -8,7 +8,7 @@
 
 #include "SerialSlave.h"
 #include "SpeedyStepper.h"
-#include "SpeedyStepper.cpp"
+
 
 #define ADDRESS 17
 
