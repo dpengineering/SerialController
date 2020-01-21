@@ -104,7 +104,8 @@ Callable callables[] = {
   {"moveStepperToPos", moveStepperToPos},
   {"moveStepperDeg", moveStepperDeg},
   {"moveStepperRev", moveStepperRev},
-  {"setStepperSpeed", setStepperSpeed}
+  {"setStepperSpeed", setStepperSpeed},
+  {"setStepperAcceleration", moveStepperRev}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
@@ -314,6 +315,32 @@ void setStepperSpeed(byte dataLength, byte *dataArray) {
       break;
     case 6:
       stepper6.setSpeedInStepsPerSecond(speedStepper);
+      break;
+  }
+}
+
+void setStepperAcceleration(byte dataLength, byte *dataArray) {
+  int accelStepper = ((int *) (dataArray + 2))[0];
+  byte stepper = dataArray[0];
+  
+  switch (stepper) {
+    case 1:
+      stepper1.setAccelerationInStepsPerSecondPerSecond(accelStepper);
+      break;
+    case 2:
+      stepper2.setAccelerationInStepsPerSecondPerSecond(accelStepper);
+      break;
+    case 3:
+      stepper3.setAccelerationInStepsPerSecondPerSecond(accelStepper);
+      break;
+    case 4:
+      stepper4.setAccelerationInStepsPerSecondPerSecond(accelStepper);
+      break;
+    case 5:
+      stepper5.setAccelerationInStepsPerSecondPerSecond(accelStepper);
+      break;
+    case 6:
+      stepper6.setAccelerationInStepsPerSecondPerSecond(accelStepper);
       break;
   }
 }
