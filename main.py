@@ -34,10 +34,12 @@ def run_arduinos():
 
     # setStepperAcceleration Testing Block
     #  print(a.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+ #   print(a.moveStepper([1, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
-    print(a.setStepperAccel([1, 1] + list((50).to_bytes(2, "little")), format_out=FORMAT_STRING))
+ #   time.sleep(2)
 
-    print(a.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperHome([1, 1] + list((23).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
 
     #  print(b.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   print(b.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
@@ -48,7 +50,7 @@ def run_arduinos():
     #   print(a.moveStepper([2, 0] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   time.sleep(3)
 
-    time.sleep(7)
+    time.sleep(70)
 
     print(a.disable(format_out=FORMAT_STRING))
 

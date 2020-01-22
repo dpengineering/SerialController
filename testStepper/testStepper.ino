@@ -1,4 +1,5 @@
 #include "SpeedyStepper.h"
+// #include "SpeedyStepper.cpp"
 
 SpeedyStepper stepper1;
 SpeedyStepper stepper2;
@@ -9,6 +10,8 @@ SpeedyStepper stepper6;
 
 void setup() {
   Serial.begin(9600);
+
+  pinMode(23, INPUT);
 
   stepper1.connectToPort(1) ;
   stepper1.setSpeedInStepsPerSecond(500);
@@ -28,9 +31,11 @@ void setup() {
   stepper6.connectToPort(6);
   stepper6.setSpeedInStepsPerSecond(500);
   stepper6.setAccelerationInStepsPerSecondPerSecond(500);
-
-  testStepper();
-  delay(10000);
+  
+ // testStepper();
+ //delay(10000);
+  moveStepperHome();
+  delay(10000 * 2);
   disable();
 
 }
@@ -57,6 +62,59 @@ void testStepper() {
   stepper5.processMovement();
   stepper6.processMovement();
  }
+
+}
+
+void moveStepperHome() {
+  Serial.print("running moveStepperHome");
+  
+  int switchPin = 23;
+  byte stepper = 1;
+  long maxDistance = 100000;
+  long dir = 1;
+  float spd = 500;
+  if (dir = 0)
+    dir = -1;
+
+ /* do{
+   testStepper();
+  }while (digitalRead(23) == LOW);
+  
+  while(true) {
+
+  while (digitalRead(23) == LOW) {
+    testStepper();
+  }
+  
+*/
+  
+  
+  switch (stepper) {
+    case 1:
+      stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      Serial.print("stepper one");
+      break;
+    case 2:
+      stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 3:
+      stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 4:
+      stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 5:
+      stepper5.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+    case 6:
+      stepper6.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      break;
+  }
+  
+}
+
+void function() {
+
 
 }
 
