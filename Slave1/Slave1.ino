@@ -322,7 +322,7 @@ void setStepperSpeed(byte dataLength, byte *dataArray) {
   }
 }
 
-
+//Some parameters hard coded for ease of use
 void moveStepperHome(byte dataLength, byte *dataArray) {
   int switchPin = ((int *) (dataArray + 2))[0];
   byte stepper = dataArray[0];
@@ -353,6 +353,7 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
       break;
   }
 }
+
 
 
   
