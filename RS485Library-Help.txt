@@ -105,6 +105,18 @@ void toggleLED(byte dataLength, byte *dataArray) {
 
 void setStepperSpeed(byte dataLength, byte *dataArray) {
 
+Method Call:
+
+    print(a.setStepperSpeed([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    Parameters: First Parameter is port, second parameter is direction, third parameter is speed
+
+}
+
+
+void setStepperAcceleration(byte dataLength, byte *dataArray) {
+
+
 
 }
 
