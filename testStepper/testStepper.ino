@@ -33,7 +33,7 @@ void setup() {
   stepper6.setAccelerationInStepsPerSecondPerSecond(500);
   
  // testStepper();
- //delay(10000);
+  //delay(10000);
   moveStepperHome();
   delay(10000 * 2);
   disable();
@@ -42,11 +42,14 @@ void setup() {
 
 void loop() {
 
+ // moveStepperHome();
+ // stepper1.processMovement();
+  //delay(10000);
+
 }
 
-
 void testStepper() {
-  
+
   stepper1.setupRelativeMoveInSteps(1000);
   stepper2.setupRelativeMoveInSteps(1000);
   stepper3.setupRelativeMoveInSteps(1000);
@@ -66,33 +69,45 @@ void testStepper() {
 }
 
 void moveStepperHome() {
-  Serial.print("running moveStepperHome");
+  Serial.println("running moveStepperHome");
   
-  int switchPin = 23;
+  int switchPin = 29;
   byte stepper = 1;
   long maxDistance = 100000;
   long dir = 1;
   float spd = 500;
-  if (dir = 0)
+  if (dir == 0)
     dir = -1;
 
- /* do{
-   testStepper();
-  }while (digitalRead(23) == LOW);
-  
-  while(true) {
+  // Switching x and y!
 
-  while (digitalRead(23) == LOW) {
-    testStepper();
-  }
-  
-*/
-  
+  int x = 5;
+  int y = 10;
+
+  x = x ^ y;
+  y = x ^ y;
+  x = x ^ y;
+  Serial.println(x);
+  Serial.println(y);
+
+  bool T = 5;
+  Serial.println(T);
+  T -= 1;
+  Serial.println(T);
+
   
   switch (stepper) {
     case 1:
+    //  stepper1.enableStepper();
+   //   stepper1.setupMoveInSteps(maxDistance);
+    //  char buff[100];
+    //  sprintf(buff, "This is stepper1.getTargetPos...%lu", stepper1.getTargetPositionInSteps());
+   //   Serial.println(buff);
+   //   Serial.print("This is stepper1.getTargetPos..." );
+   //   Serial.println(stepper1.getTargetPositionInSteps());
+    //  stepper1.setCurrentPositionInSteps(1);
       stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-      Serial.print("stepper one");
+      Serial.println("stepper one");
       break;
     case 2:
       stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);

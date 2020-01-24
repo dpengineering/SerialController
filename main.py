@@ -40,6 +40,7 @@ def run_arduinos():
 
     print(a.moveStepperHome([1, 1] + list((23).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
+    print(a.moveStepperHome([1, 1] + list((23).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     #  print(b.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   print(b.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
