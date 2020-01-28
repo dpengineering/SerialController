@@ -117,9 +117,19 @@ Method Call:
 void setStepperAcceleration(byte dataLength, byte *dataArray) {
 
 
+}
+
+
+void moveStepperHome(byte dataLength, byte *dataArray) {
+    print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    The first parameter is the stepper port, the second parameter is the direction, and the list parameter is the switch port.
+
+     f
 
 }
 
+ b
 
 
 

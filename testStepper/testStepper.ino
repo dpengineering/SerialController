@@ -34,8 +34,8 @@ void setup() {
   
  // testStepper();
   //delay(10000);
-  moveStepperHome();
-  delay(10000 * 2);
+ // moveStepperHome();
+ // delay(10000 * 2);
   disable();
 
 }
@@ -44,7 +44,7 @@ void loop() {
 
  // moveStepperHome();
  // stepper1.processMovement();
-  //delay(10000);
+ //delay(10000);
 
 }
 
