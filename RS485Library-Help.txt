@@ -22,13 +22,17 @@ Callable callables[] = {
   {"disable", disable}, done
   {"blinkLED", blinkLED}, done
   {"toggleLED", toggleLED}, done
-  {"moveStepperToPos", moveStepperToPos},
+  {"moveStepperToPos", moveStepperToPos}, done
   {"moveStepperDeg", moveStepperDeg},
-  {"moveStepperRev", moveStepperRev},
+  {"moveStepperRev", moveStepperRev}, done
   {"moveStepperHome", moveStepperHome},
   {"setStepperSpeed", setStepperSpeed}, done
   {"setStepperAccel", setStepperAccel} done
 };
+
+Some of the callables have shorter names than what is perhaps logical or expected. For example,
+setStepperAccel--a function that accelerates the stepper--would logically be named setStepperAcceleration. However,
+this is too long a function name that is asked for when building the callables.
 
 At the top of the main.py file, do a few things
 
@@ -50,6 +54,7 @@ The line above declares 'a' as an Arduino Object, at port 17.
 Each Arduino will have its own name (in this case, 'a'), and its own port, in this case '17'
 The port is declared at the top of the Arduino file, with '#define ADDRESS 17'
 (The port is arbitrary)
+For all functions, "1" is clockwise, and "-1" is counterclockwise
 
 
 void moveStepper(byte dataLength, byte *dataArray) {
@@ -79,16 +84,16 @@ void moveStepper(byte dataLength, byte *dataArray) {
 
 void disable(byte dataLength, byte *dataArray) {
 
-Description: Frees the stepper motor. This prevents overheating!
+    Description: Frees the stepper motor. This prevents overheating!
 
-How to use:
+    How to use:
 
-An example of how to call the function in the py file would be:
+    An example of how to call the function in the py file would be:
 
-print(a.disable([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.disable([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
-The disable function takes two parameters, and then does nothing with them.
-Feel free to put anything for the parameters! (Any integer between 0 and 255)
+    The disable function takes two parameters, and then does nothing with them.
+    Feel free to put anything for the parameters! (Any integer between 0 and 255)
 
 }
 
@@ -136,7 +141,7 @@ Method Call:
 
 void setStepperAccel(byte dataLength, byte *dataArray) {
 
-An example of how to call the function in the py file would be:
+    An example of how to call the function in the py file would be:
 
     print(a.setStepperAccel([1, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
@@ -146,15 +151,59 @@ An example of how to call the function in the py file would be:
 
 
 void moveStepperHome(byte dataLength, byte *dataArray) {
+
+    An example of how to call the function in the py file would be:
+
     print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     The first parameter is the stepper port, the second parameter is the direction, and the list parameter is the switch port.
 
-    In order to be super accurate, the stepper actually checks if it really hit the switch during its path by reversing its direction.
-    This means that the moveToHomeInSteps method
+    In order to be accurate, the stepper actually checks if it really hit the switch during its path by reversing its direction.
+    This means that the moveToHomeInSteps method actually calls the homing function multiple times,
+    and reverses the direction of the stepper until it decides that it is actually at the home position
 
 }
 
 
+void moveStepperToPos(byte dataLength, byte *dataArray) {
 
+    Description: This function moves a stepper to a specific position, in steps.
 
+    How to use:
+
+    An example of how to call the function in the py file would be:
+
+    print(a.moveStepperToPos([1, 1] + list((300).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    Parameters:
+
+    moveStepperToPos works by specifying a port (the first parameter), and a direction (the second parameter).
+    The parameter in the list specifies a position for where the stepper should move to. In this case, it is 300.
+
+}
+
+void moveStepperDeg(byte dataLength, byte *dataArray) {
+
+    Description: This function rotates the stepper, in degrees.
+
+    An example of how to call the function in the py file would be:
+
+    print(a.moveStepperDeg([1, 1] + list((360).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    moveStepperDeg works by specifying a port (the first parameter), and a direction (the second parameter).
+    The list parameter (the third parameter) is the amount of degrees that you want the stepper to turn.
+
+}
+
+void moveStepperRev(byte dataLength, byte *dataArray) {
+
+    Description: This function rotates the stepper, in revolutions.
+
+    An example of how to call the function in the py file would be:
+
+    print(a.moveStepperRev([1, 1] + list((360).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    moveStepperRev works much the same way that moveStepperDeg does. The only difference is that the list
+    parameter takes the number of revolutions to rotate the stepper by, and that the number must be an integer value.
+    This means that you cannot run 2.5 revolutions. (To do that, use moveStepper or moveStepperDeg).
+}

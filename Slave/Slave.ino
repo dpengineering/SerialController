@@ -2,7 +2,7 @@
 //      *                                                                *
 //      *                 Header file for Slave.ino                      *
 //      *                                                                *
-//      *                 Copyright (c) Josh Benson                      *
+//      *                 Copyright (c) Josh Benson and Pratik Gupta     *
 //      *                                                                *
 //      ******************************************************************
 
