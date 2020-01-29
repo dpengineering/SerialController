@@ -2,7 +2,7 @@
 //      *                                                                *
 //      *          Header file for RS485Library-Help.txt                 *
 //      *                                                                *
-//      *              Copyright (c) Josh Benson DPEA                    *
+//      *              Copyright (c) Pratik Gupta and Josh Benson        *
 //      *                                                                *
 //      ******************************************************************
 
@@ -16,10 +16,19 @@ This fle is to help you use the RS485 library.
 
 
 As of right now the working callables include:
-    moveStepper
-    blinkLED
-    toggleLED
-    disable
+
+Callable callables[] = {
+  {"moveStepper", moveStepper}, done
+  {"disable", disable}, done
+  {"blinkLED", blinkLED}, done
+  {"toggleLED", toggleLED}, done
+  {"moveStepperToPos", moveStepperToPos},
+  {"moveStepperDeg", moveStepperDeg},
+  {"moveStepperRev", moveStepperRev},
+  {"moveStepperHome", moveStepperHome},
+  {"setStepperSpeed", setStepperSpeed}, done
+  {"setStepperAccel", setStepperAccel} done
+};
 
 At the top of the main.py file, do a few things
 
@@ -99,7 +108,15 @@ void blinkLED(byte dataLength, byte *dataArray) {
 
 void toggleLED(byte dataLength, byte *dataArray) {
 
-    Description:
+    Description: LED switch state must be 0 or 1. (This is the second value in dataArray)
+
+    How to use:
+
+    An example of how to call the function in the py file would be:
+
+    print(a.toggleLED([23, 200] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+
 
 }
 
@@ -111,11 +128,19 @@ Method Call:
 
     Parameters: First Parameter is port, second parameter is direction, third parameter is speed
 
+    500 serves as a good speed. 500 is what we used for both setting the speed and the acceleration in the
+    void setup of the Slave file. setStepperAccel is right below!
+
 }
 
 
-void setStepperAcceleration(byte dataLength, byte *dataArray) {
+void setStepperAccel(byte dataLength, byte *dataArray) {
 
+An example of how to call the function in the py file would be:
+
+    print(a.setStepperAccel([1, 1] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    Parameters: First Parameter is port, second parameter is direction, third parameter is acceleration rate
 
 }
 
@@ -125,11 +150,11 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
 
     The first parameter is the stepper port, the second parameter is the direction, and the list parameter is the switch port.
 
-     f
+    In order to be super accurate, the stepper actually checks if it really hit the switch during its path by reversing its direction.
+    This means that the moveToHomeInSteps method
 
 }
 
- b
 
 
 
