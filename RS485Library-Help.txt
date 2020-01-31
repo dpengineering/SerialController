@@ -23,7 +23,7 @@ Callable callables[] = {
   {"blinkLED", blinkLED}, done
   {"toggleLED", toggleLED}, done
   {"moveStepperToPos", moveStepperToPos}, done
-  {"moveStepperDeg", moveStepperDeg},
+  {"moveStepperDeg", moveStepperDeg}, done
   {"moveStepperRev", moveStepperRev}, done
   {"moveStepperHome", moveStepperHome},
   {"setStepperSpeed", setStepperSpeed}, done
@@ -164,7 +164,6 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
 
 }
 
-
 void moveStepperToPos(byte dataLength, byte *dataArray) {
 
     Description: This function moves a stepper to a specific position, in steps.
@@ -191,7 +190,7 @@ void moveStepperDeg(byte dataLength, byte *dataArray) {
     print(a.moveStepperDeg([1, 1] + list((360).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     moveStepperDeg works by specifying a port (the first parameter), and a direction (the second parameter).
-    The list parameter (the third parameter) is the amount of degrees that you want the stepper to turn.
+    The list parameter (the third parameter) is the amount of degrees that you want the stepper to  turn.
 
 }
 
@@ -207,3 +206,5 @@ void moveStepperRev(byte dataLength, byte *dataArray) {
     parameter takes the number of revolutions to rotate the stepper by, and that the number must be an integer value.
     This means that you cannot run 2.5 revolutions. (To do that, use moveStepper or moveStepperDeg).
 }
+
+testStepper can be used to isolate functions from the Pi, in order

@@ -32,7 +32,7 @@ void setup() {
   stepper6.setSpeedInStepsPerSecond(500);
   stepper6.setAccelerationInStepsPerSecondPerSecond(500);
   
- // testStepper();
+  testStepper();
   //delay(10000);
 //  moveStepperHome();
  // delay(10000 * 2);
@@ -50,12 +50,12 @@ void loop() {
 
 void testStepper() {
 
-  stepper1.setupRelativeMoveInSteps(1000);
-  stepper2.setupRelativeMoveInSteps(1000);
-  stepper3.setupRelativeMoveInSteps(1000);
-  stepper4.setupRelativeMoveInSteps(1000);
-  stepper5.setupRelativeMoveInSteps(1000);
-  stepper6.setupRelativeMoveInSteps(1000);
+  stepper1.setupRelativeMoveInSteps(2000);
+  stepper2.setupRelativeMoveInSteps(2000);
+  stepper3.setupRelativeMoveInSteps(2000);
+  stepper4.setupRelativeMoveInSteps(2000);
+  stepper5.setupRelativeMoveInSteps(2000);
+  stepper6.setupRelativeMoveInSteps(2000);
   while((!stepper1.motionComplete()) || (!stepper2.motionComplete()) || (!stepper3.motionComplete()) || (!stepper4.motionComplete()) || (!stepper5.motionComplete()) || (!stepper6.motionComplete()))
  {
   stepper1.processMovement();
