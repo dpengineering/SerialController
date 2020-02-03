@@ -744,7 +744,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   float originalDesiredSpeed_InStepsPerSecond;
   bool limitSwitchFlag;
   
-  Serial.println("Running moveToHomeInSteps");
+  
   //
   // setup the home switch input pin
   //

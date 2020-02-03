@@ -213,3 +213,6 @@ testStepper is an Arduino file created in order to isolate functions from the Pi
 Copy and paste your function into testStepper, and call it at the end of the setup file. This way you can check
 if there is a problem with the function itself, or with the communication between the Pi and the Arduino, or the callables,
 or some other factor.
+
+For example, when we were debugging moveStepperHome(), we copy/pasted the entire function into the testStepper file (which
+uses no callables for simplicity) and analyzed our problem from there.

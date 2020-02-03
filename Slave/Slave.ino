@@ -115,9 +115,8 @@ byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 
 void moveStepperHome(byte dataLength, byte *dataArray) {
 
-  Serial.println("running moveStepperHome");
+  /*
 
-  
   int switchPin = ((int *) (dataArray + 2))[0]; //list parameter must be switch pin
   byte stepper = dataArray[0]; //first parameter is port
   long maxDistance = 10000;
@@ -127,12 +126,10 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
   if (dir == 0) {
     dir = -1;
   }
-
-  Serial.println("created variables");
-  
+*/
 
   // variables hard-coded:
-/*
+
   int switchPin = 29;
   byte stepper = 1;
   long maxDistance = 100000;
@@ -140,8 +137,9 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
   float spd = 500;
   if (dir == 0)
     dir = -1;
-*/    
     
+
+  
   switch (stepper) {
     case 1:
       Serial.println("Stepper One Case");
@@ -328,6 +326,7 @@ void moveStepperRev(byte dataLength, byte *dataArray) {
       stepper2.enableStepper();
       stepper2.setupRelativeMoveInSteps(steps);
       running2 = true;
+      break;
     case 3:
       stepper3.enableStepper();
       stepper3.setupRelativeMoveInSteps(steps);
@@ -482,6 +481,7 @@ void moveStepperToPos(byte dataLength, byte *dataArray) {
       stepper2.enableStepper();
       stepper2.setupRelativeMoveInSteps(steps);
       running2 = true;
+      break;
     case 3:
       stepper3.enableStepper();
       stepper3.setupRelativeMoveInSteps(steps);
