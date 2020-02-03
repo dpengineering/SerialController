@@ -31,10 +31,10 @@ void setup() {
   stepper6.connectToPort(6);
   stepper6.setSpeedInStepsPerSecond(500);
   stepper6.setAccelerationInStepsPerSecondPerSecond(500);
-  
-  testStepper();
+
+  //testStepper();
   //delay(10000);
-//  moveStepperHome();
+  moveStepperHome();
  // delay(10000 * 2);
   disable();
 

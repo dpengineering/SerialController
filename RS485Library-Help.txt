@@ -207,4 +207,9 @@ void moveStepperRev(byte dataLength, byte *dataArray) {
     This means that you cannot run 2.5 revolutions. (To do that, use moveStepper or moveStepperDeg).
 }
 
-testStepper can be used to isolate functions from the Pi, in order
+testStepper
+
+testStepper is an Arduino file created in order to isolate functions from the Pi, in order to check the Arduino functions themselves.
+Copy and paste your function into testStepper, and call it at the end of the setup file. This way you can check
+if there is a problem with the function itself, or with the communication between the Pi and the Arduino, or the callables,
+or some other factor.

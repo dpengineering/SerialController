@@ -10,6 +10,8 @@ from pidev.SlaveMaster import SerialMaster, Arduino
 from pidev import RPiMIB
 import time
 
+# from pidev.Cyprus_Commands import Cyprus_Commands_RPi as cyprus
+
 RPiMIB.openSPI()
 
 a = Arduino(SerialMaster(baud=115200), 17)
@@ -40,7 +42,14 @@ def run_arduinos():
 
     #  print(a.moveStepperHome([1, 1] + list((23).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
-    print(a.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    #   cyprus.setup_servo(1)
+    #  while True:
+    #       if cyprus.read_gpio() & 0b0001:
+    #           sleep(0.05)
+    #           if cyprus.read_gpio() & 0b0001:
+    #               print("Reading switch")
 
     #  print(b.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   print(b.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
