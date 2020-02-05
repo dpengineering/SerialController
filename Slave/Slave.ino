@@ -8,7 +8,7 @@
 
 #include "SerialSlave.h"
 #include "SpeedyStepper.h"
-
+#include "SerialDebug.h"
 
 #define ADDRESS 17
 
@@ -31,7 +31,7 @@ int speedSetting = 500;
 
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
-  Serial.begin(9600);
+//  Debug.begin();
  // moveStepperHome(1, 1);
 
 //  stepper1.connectToPort(1);
@@ -138,6 +138,10 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
 
   // variables hard-coded:
 
+  stepper1.connectToPort(1);
+  stepper1.setSpeedInStepsPerSecond(500);
+  stepper1.setAccelerationInStepsPerSecondPerSecond(500);
+
   int switchPin = 29;
   byte stepper = 1;
   long maxDistance = 100000;
@@ -150,27 +154,21 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
   
   switch (stepper) {
     case 1:
-   //   Serial.println("Stepper One Case");
       stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 2:
-  //    Serial.println("Stepper Two Case");
       stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 3:
- //     Serial.println("Stepper Three Case");
       stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 4:
-  //    Serial.println("Stepper Four Case");
       stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 5:
-  //    Serial.println("Stepper Five Case");
       stepper5.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 6:
-  //    Serial.println("Stepper Six Case");
       stepper6.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
   }
@@ -245,10 +243,10 @@ void blinkLED(byte dataLength, byte *dataArray) {
 
   pinMode(LEDPin, OUTPUT);
   digitalWrite(LEDPin, HIGH);
-  Serial.print("LED On");
+ // Debug.print("LED On");
   delay(waitTime * 30);
   digitalWrite(LEDPin, LOW);
-  Serial.print("LED Off");
+ // Debug.print("LED Off");
   delay(waitTime);
 
   LED = true;
@@ -271,7 +269,7 @@ void toggleLED(byte dataLength, byte *dataArray) {
   }
   else
   {
-    Serial.print("LED switch state must be 0 or 1. This is the second value in dataArray");
+  //  Debug.print("LED switch state must be 0 or 1. This is the second value in dataArray");
   }
 
 }

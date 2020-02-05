@@ -35,7 +35,7 @@ def run_arduinos():
     #  print(a.moveStepperToPos([5, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     # setStepperAcceleration Testing Block
-    #  print(a.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperRev([1, 1] + list((3).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepper([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     #   time.sleep(2)

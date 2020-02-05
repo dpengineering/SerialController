@@ -1,5 +1,4 @@
 #include "SpeedyStepper.h"
-#include "SerialDebug.h"
 // #include "SpeedyStepper.cpp"
 
 SpeedyStepper stepper1;
@@ -10,7 +9,7 @@ SpeedyStepper stepper5;
 SpeedyStepper stepper6;
 
 void setup() {
-  Debug.begin();
+  Serial.begin(9600);
 
   pinMode(23, INPUT);
 
@@ -35,8 +34,8 @@ void setup() {
 
   //testStepper();
   //delay(10000);
-  //moveStepperHome();
-  //delay(10000 * 2);
+  moveStepperHome();
+  delay(10000 * 2);
   disable();
 
 }
@@ -121,22 +120,22 @@ void disable() {
   x = x ^ y;
   y = x ^ y;
   x = x ^ y;
-  Debug.println(x);
-  Debug.println(y);
+  Serial.println(x);
+  Serial.println(y);
 
   bool T = 5;
-  Debug.println(T);
+  Serial.println(T);
   T -= 1;
-  Debug.println(T);
+  Serial.println(T);
 */
 
     //  stepper1.enableStepper();
    //   stepper1.setupMoveInSteps(maxDistance);
     //  char buff[100];
     //  sprintf(buff, "This is stepper1.getTargetPos...%lu", stepper1.getTargetPositionInSteps());
-   //   Debug.println(buff);
-   //   Debug.print("This is stepper1.getTargetPos..." );
-   //   Debug.println(stepper1.getTargetPositionInSteps());
+   //   Serial.println(buff);
+   //   Serial.print("This is stepper1.getTargetPos..." );
+   //   Serial.println(stepper1.getTargetPositionInSteps());
     //  stepper1.setCurrentPositionInSteps(1);
   
 }
