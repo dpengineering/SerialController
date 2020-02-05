@@ -34,8 +34,8 @@ void setup() {
 
   //testStepper();
   //delay(10000);
-  moveStepperHome();
-  delay(10000 * 2);
+  //moveStepperHome();
+  //delay(10000 * 2);
   disable();
 
 }
@@ -69,7 +69,6 @@ void testStepper() {
 }
 
 void moveStepperHome() {
-  Serial.println("running moveStepperHome");
   
   int switchPin = 29;
   byte stepper = 1;
@@ -79,35 +78,10 @@ void moveStepperHome() {
   if (dir == 0)
     dir = -1;
 
-  // Switching x and y!
-
-  int x = 5;
-  int y = 10;
-
-  x = x ^ y;
-  y = x ^ y;
-  x = x ^ y;
-  Serial.println(x);
-  Serial.println(y);
-
-  bool T = 5;
-  Serial.println(T);
-  T -= 1;
-  Serial.println(T);
-
   
   switch (stepper) {
     case 1:
-    //  stepper1.enableStepper();
-   //   stepper1.setupMoveInSteps(maxDistance);
-    //  char buff[100];
-    //  sprintf(buff, "This is stepper1.getTargetPos...%lu", stepper1.getTargetPositionInSteps());
-   //   Serial.println(buff);
-   //   Serial.print("This is stepper1.getTargetPos..." );
-   //   Serial.println(stepper1.getTargetPositionInSteps());
-    //  stepper1.setCurrentPositionInSteps(1);
       stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-      Serial.println("stepper one");
       break;
     case 2:
       stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
@@ -128,11 +102,6 @@ void moveStepperHome() {
   
 }
 
-void function() {
-
-
-}
-
 void disable() {
 
   stepper1.disableStepper();
@@ -141,5 +110,32 @@ void disable() {
   stepper4.disableStepper();
   stepper5.disableStepper();
   stepper6.disableStepper();
+
+  /*
+  // Switching x and y!
+
+  int x = 5;
+  int y = 10;
+
+  x = x ^ y;
+  y = x ^ y;
+  x = x ^ y;
+  Serial.println(x);
+  Serial.println(y);
+
+  bool T = 5;
+  Serial.println(T);
+  T -= 1;
+  Serial.println(T);
+*/
+
+    //  stepper1.enableStepper();
+   //   stepper1.setupMoveInSteps(maxDistance);
+    //  char buff[100];
+    //  sprintf(buff, "This is stepper1.getTargetPos...%lu", stepper1.getTargetPositionInSteps());
+   //   Serial.println(buff);
+   //   Serial.print("This is stepper1.getTargetPos..." );
+   //   Serial.println(stepper1.getTargetPositionInSteps());
+    //  stepper1.setCurrentPositionInSteps(1);
   
 }

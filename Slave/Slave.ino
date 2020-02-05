@@ -34,9 +34,9 @@ void setup() {
   Serial.begin(9600);
  // moveStepperHome(1, 1);
 
-  stepper1.connectToPort(1);
-  stepper1.setSpeedInStepsPerSecond(500);
-  stepper1.setAccelerationInStepsPerSecondPerSecond(500);
+//  stepper1.connectToPort(1);
+//  stepper1.setSpeedInStepsPerSecond(500);
+//  stepper1.setAccelerationInStepsPerSecondPerSecond(500);
 
   stepper2.connectToPort(2);
   stepper2.setSpeedInStepsPerSecond(500);
@@ -58,11 +58,16 @@ void setup() {
   stepper6.setSpeedInStepsPerSecond(500);
   stepper6.setAccelerationInStepsPerSecondPerSecond(500);
 
+  //LEDs for testing pinmodes
 
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
 }
 
 void loop() {
-
+/*
   if (stepper1.processMovement() && running1) {
     stepper1.disableStepper();
     running1 = false;
@@ -92,6 +97,8 @@ void loop() {
     stepper6.disableStepper();
     running6 = false;
   }
+  */
+  delay(100);
 }
 
   Func moveStepper;
@@ -107,6 +114,7 @@ Callable callables[] = {
   {"moveStepperDeg", moveStepperDeg},
   {"moveStepperRev", moveStepperRev},
   {"moveStepperHome", moveStepperHome},
+  {"moveStepperHome1", moveStepperHome1},
   {"setStepperSpeed", setStepperSpeed},
   {"setStepperAccel", setStepperAccel}
 };
@@ -142,30 +150,48 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
   
   switch (stepper) {
     case 1:
-      Serial.println("Stepper One Case");
+   //   Serial.println("Stepper One Case");
       stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 2:
-      Serial.println("Stepper Two Case");
+  //    Serial.println("Stepper Two Case");
       stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 3:
-      Serial.println("Stepper Three Case");
+ //     Serial.println("Stepper Three Case");
       stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 4:
-      Serial.println("Stepper Four Case");
+  //    Serial.println("Stepper Four Case");
       stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 5:
-      Serial.println("Stepper Five Case");
+  //    Serial.println("Stepper Five Case");
       stepper5.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 6:
-      Serial.println("Stepper Six Case");
+  //    Serial.println("Stepper Six Case");
       stepper6.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
   }
+}
+
+void moveStepperHome1(byte dataLength, byte *dataArray) {
+  stepper1.connectToPort(1);
+  // stepper1.setSpeedInStepsPerSecond(500);
+  // stepper1.setAccelerationInStepsPerSecondPerSecond(500);
+
+  int switchPin = 29;
+  byte stepper = 1;
+  long maxDistance = 100000;
+  long dir = 1;
+  float spd = 500;
+ // pinMode(10, OUTPUT);
+  
+ // digitalWrite(10, HIGH);
+  stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+ // digitalWrite(10, LOW);
+  
 }
 
 void moveStepper(byte dataLength, byte *dataArray) {
@@ -186,6 +212,7 @@ void moveStepper(byte dataLength, byte *dataArray) {
       stepper2.enableStepper();
       stepper2.setupRelativeMoveInSteps(steps);
       running2 = true;
+      break;
     case 3:
       stepper3.enableStepper();
       stepper3.setupRelativeMoveInSteps(steps);
@@ -281,6 +308,7 @@ void moveStepperDeg(byte dataLength, byte *dataArray) {
       stepper2.enableStepper();
       stepper2.setupRelativeMoveInSteps(steps);
       running2 = true;
+      break;
     case 3:
       stepper3.enableStepper();
       stepper3.setupRelativeMoveInSteps(steps);

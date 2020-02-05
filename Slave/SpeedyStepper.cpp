@@ -192,6 +192,8 @@ const int STEPPER_ENABLE_ENABLED = LOW;
 const int STEPPER_ENABLE_DISABLED = HIGH;
 
 
+
+
 //
 // constructor for the stepper class
 //
@@ -744,19 +746,23 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   float originalDesiredSpeed_InStepsPerSecond;
   bool limitSwitchFlag;
   
-  
+
   //
   // setup the home switch input pin
   //
   pinMode(homeLimitSwitchPin, INPUT_PULLUP);
-  
   
   //
   // remember the current speed setting
   //
   originalDesiredSpeed_InStepsPerSecond = desiredSpeed_InStepsPerSecond; 
  
- 
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  
+ // digitalWrite(10, HIGH);
   //
   // if the home switch is not already set, move toward it
   //
@@ -770,6 +776,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
     limitSwitchFlag = false;
     while(!processMovement())
     {
+ //     digitalWrite(3, HIGH); //turns on when looking for switch (switch is HIGH)
       if (digitalRead(homeLimitSwitchPin) == LOW)
       {
         delay(1);
@@ -777,6 +784,8 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
         {
           delay(80);                // allow time for the switch to debounce
           limitSwitchFlag = true;
+          delay(100);
+       //   digitalWrite(10, LOW);
           break;
         }
       }
@@ -794,6 +803,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   // the switch has been detected, now move away from the switch
   //
   setupRelativeMoveInSteps(maxDistanceToMoveInSteps * directionTowardHome * -1);
+//  digitalWrite(9, HIGH);
   limitSwitchFlag = false;
   while(!processMovement())
   {
@@ -804,6 +814,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
       {
         delay(80);                // allow time for the switch to debounce
         limitSwitchFlag = true;
+     //   digitalWrite(10, HIGH);
         break;
       }
     }
@@ -821,6 +832,8 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   //
   setSpeedInStepsPerSecond(speedInStepsPerSecond/8);
   setupRelativeMoveInSteps(maxDistanceToMoveInSteps * directionTowardHome);
+  delay(500);
+ // digitalWrite(9, LOW);
   limitSwitchFlag = false;
   while(!processMovement())
   {
@@ -831,6 +844,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
       {    
         delay(80);                // allow time for the switch to debounce
         limitSwitchFlag = true;
+      //  digitalWrite(10, LOW);
         break;
       }
     }
@@ -846,12 +860,15 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   //
   // successfully homed, set the current position to 0
   //
-  setCurrentPositionInSteps(0L);    
-
+  setCurrentPositionInSteps(0L);
+ // digitalWrite(4, HIGH);    
+ // delay(1000);
   //
   // restore original velocity
   //
   setSpeedInStepsPerSecond(originalDesiredSpeed_InStepsPerSecond);
+ // digitalWrite(3, LOW);
+ // digitalWrite(4, LOW);
   return(true);
 }
 
@@ -983,21 +1000,27 @@ bool SpeedyStepper::processMovement(void)
   unsigned long periodSinceLastStep_InUS;
   long distanceToTarget_InSteps;
 
+  digitalWrite(10, HIGH);
+  delay(2000);
+
   //
   // check if already at the target position
   //
-  if (currentPosition_InSteps == targetPosition_InSteps)
+  if (currentPosition_InSteps == targetPosition_InSteps) { //if it is at home
+    digitalWrite(10, LOW);
     return(true);
+  }
 
   //
   // check if this is the first call to start this new move
   //
   if (startNewMove)
-  {    
+  {
+    digitalWrite(4, HIGH);   
     ramp_LastStepTime_InUS = micros();
     startNewMove = false;
   }
-    
+
   //
   // determine how much time has elapsed since the last step (Note 1: this method works  
   // even if the time has wrapped. Note 2: all variables must be unsigned)
@@ -1008,15 +1031,18 @@ bool SpeedyStepper::processMovement(void)
   //
   // if it is not time for the next step, return
   //
-  if (periodSinceLastStep_InUS < (unsigned long) ramp_NextStepPeriod_InUS)
+  if (periodSinceLastStep_InUS < (unsigned long) ramp_NextStepPeriod_InUS) {
+    
     return(false);
+  }
 
   //
   // determine the distance from the current position to the target
   //
   distanceToTarget_InSteps = targetPosition_InSteps - currentPosition_InSteps;
-  if (distanceToTarget_InSteps < 0) 
+  if (distanceToTarget_InSteps < 0) {
     distanceToTarget_InSteps = -distanceToTarget_InSteps;
+  }
 
   //
   // test if it is time to start decelerating, if so change from accelerating to decelerating
@@ -1027,9 +1053,13 @@ bool SpeedyStepper::processMovement(void)
   //
   // execute the step on the rising edge
   //
+  digitalWrite(9, HIGH);
   digitalWrite(stepPin, HIGH);
+
+  delay(2000);
+
   delayMicroseconds(2);        // set to almost nothing because there is so much code between rising and falling edges
-  
+  digitalWrite(9, LOW);
   //
   // update the current position and speed
   //

@@ -215,4 +215,5 @@ if there is a problem with the function itself, or with the communication betwee
 or some other factor.
 
 For example, when we were debugging moveStepperHome(), we copy/pasted the entire function into the testStepper file (which
-uses no callables for simplicity) and analyzed our problem from there.
+uses no callables for simplicity) and analyzed our problem from there. We have discovered that adding many Serial.println()
+statements

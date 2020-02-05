@@ -29,7 +29,7 @@ def run_arduinos():
     # moveStepperToPos Testing Block
 
     #  print(a.moveStepperToPos([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    print(a.moveStepperToPos([2, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
+  #  print(a.moveStepperToPos([2, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepperToPos([3, 1] + list((300).to_bytes(2, "little")), format_out=FORMAT_STRING))
     # print(a.moveStepperToPos([4, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepperToPos([5, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
@@ -42,7 +42,9 @@ def run_arduinos():
 
     #  print(a.moveStepperHome([1, 1] + list((23).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
-    print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    #  print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    print(a.moveStepperHome1([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     #   cyprus.setup_servo(1)
     #  while True:
@@ -60,7 +62,7 @@ def run_arduinos():
     #   print(a.moveStepper([2, 0] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   time.sleep(3);
 
-    time.sleep(10)
+    time.sleep(60)
 
     print(a.disable(format_out=FORMAT_STRING))
 
