@@ -31,7 +31,7 @@ int speedSetting = 500;
 
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
-  Serial.begin(9600);
+ // Serial.begin(9600);
  // moveStepperHome(1, 1);
 
   stepper1.connectToPort(1);
@@ -62,7 +62,7 @@ void setup() {
 }
 
 void loop() {
-
+/*
   if (stepper1.processMovement() && running1) {
     stepper1.disableStepper();
     running1 = false;
@@ -92,6 +92,7 @@ void loop() {
     stepper6.disableStepper();
     running6 = false;
   }
+  */
 }
 
   Func moveStepper;
@@ -142,27 +143,27 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
   
   switch (stepper) {
     case 1:
-      Serial.println("Stepper One Case");
+     // Serial.println("Stepper One Case");
       stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 2:
-      Serial.println("Stepper Two Case");
+     // Serial.println("Stepper Two Case");
       stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 3:
-      Serial.println("Stepper Three Case");
+     // Serial.println("Stepper Three Case");
       stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 4:
-      Serial.println("Stepper Four Case");
+   //   Serial.println("Stepper Four Case");
       stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 5:
-      Serial.println("Stepper Five Case");
+   //   Serial.println("Stepper Five Case");
       stepper5.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 6:
-      Serial.println("Stepper Six Case");
+    //  Serial.println("Stepper Six Case");
       stepper6.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
   }
@@ -218,10 +219,10 @@ void blinkLED(byte dataLength, byte *dataArray) {
 
   pinMode(LEDPin, OUTPUT);
   digitalWrite(LEDPin, HIGH);
-  Serial.print("LED On");
+ // Serial.print("LED On");
   delay(waitTime * 30);
   digitalWrite(LEDPin, LOW);
-  Serial.print("LED Off");
+ // Serial.print("LED Off");
   delay(waitTime);
 
   LED = true;
@@ -244,7 +245,7 @@ void toggleLED(byte dataLength, byte *dataArray) {
   }
   else
   {
-    Serial.print("LED switch state must be 0 or 1. This is the second value in dataArray");
+  //  Serial.print("LED switch state must be 0 or 1. This is the second value in dataArray");
   }
 
 }
@@ -380,8 +381,6 @@ void setStepperSpeed(byte dataLength, byte *dataArray) {
 }
 
 //Some parameters hard coded for ease of use
-
-
 
 
   

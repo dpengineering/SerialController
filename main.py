@@ -15,7 +15,7 @@ import time
 RPiMIB.openSPI()
 
 a = Arduino(SerialMaster(baud=115200), 17)
-b = Arduino(SerialMaster(baud=115200), 18)
+# b = Arduino(SerialMaster(baud=115200), 18)
 
 FORMAT_LIST = 0
 FORMAT_BYTE = 1
@@ -29,15 +29,15 @@ def run_arduinos():
     # moveStepperToPos Testing Block
 
     #  print(a.moveStepperToPos([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    print(a.moveStepperToPos([2, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    #  print(a.moveStepperToPos([2, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepperToPos([3, 1] + list((300).to_bytes(2, "little")), format_out=FORMAT_STRING))
     # print(a.moveStepperToPos([4, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepperToPos([5, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     # setStepperAcceleration Testing Block
-    #  print(a.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    #  print(a.moveStepperRev([1, 1] + list((4).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepper([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
-
+ 
     #   time.sleep(2)
 
     #  print(a.moveStepperHome([1, 1] + list((23).to_bytes(2, "little")), format_out=FORMAT_STRING))
@@ -60,7 +60,7 @@ def run_arduinos():
     #   print(a.moveStepper([2, 0] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   time.sleep(3);
 
-    time.sleep(10)
+    time.sleep(60)
 
     print(a.disable(format_out=FORMAT_STRING))
 
