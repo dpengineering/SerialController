@@ -1,4 +1,5 @@
 #include "SpeedyStepper.h"
+//#include "SerialDebug.h"
 // #include "SpeedyStepper.cpp"
 
 SpeedyStepper stepper1;
@@ -12,6 +13,9 @@ void setup() {
   Serial.begin(9600);
 
   pinMode(23, INPUT);
+
+  //Debug.println("Debug print statements are working");
+
 
   stepper1.connectToPort(1) ;
   stepper1.setSpeedInStepsPerSecond(500);
@@ -34,7 +38,7 @@ void setup() {
 
   //testStepper();
   //delay(10000);
-  //moveStepperHome();
+ // moveStepperHome();
  // delay(10000 * 2);
   disable();
 
@@ -78,23 +82,7 @@ void moveStepperHome() {
   float spd = 500;
   if (dir == 0)
     dir = -1;
-
-  // Switching x and y!
-
-  int x = 5;
-  int y = 10;
-
-  x = x ^ y;
-  y = x ^ y;
-  x = x ^ y;
-  Serial.println(x);
-  Serial.println(y);
-
-  bool T = 5;
-  Serial.println(T);
-  T -= 1;
-  Serial.println(T);
-
+    
   
   switch (stepper) {
     case 1:
@@ -107,6 +95,9 @@ void moveStepperHome() {
    //   Serial.println(stepper1.getTargetPositionInSteps());
     //  stepper1.setCurrentPositionInSteps(1);
       stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+     // stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+     // stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+     // stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       Serial.println("stepper one");
       break;
     case 2:
@@ -141,5 +132,23 @@ void disable() {
   stepper4.disableStepper();
   stepper5.disableStepper();
   stepper6.disableStepper();
+  
+  // Switching x and y!
+
+  /*
+  int x = 5;
+  int y = 10;
+
+  x = x ^ y;
+  y = x ^ y;
+  x = x ^ y;
+  Serial.println(x);
+  Serial.println(y);
+
+  bool T = 5;
+  Serial.println(T);
+  T -= 1;
+  Serial.println(T);
+*/
   
 }

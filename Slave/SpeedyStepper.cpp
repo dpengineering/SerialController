@@ -159,6 +159,7 @@
 //
 
 #include "SpeedyStepper.h"
+#include "SerialDebug.h"
 
 // ---------------------------------------------------------------------------------
 //                                  Setup functions 
@@ -209,6 +210,8 @@ SpeedyStepper::SpeedyStepper()
   desiredSpeed_InStepsPerSecond = 200.0;
   acceleration_InStepsPerSecondPerSecond = 200.0;
   currentStepPeriod_InUS = 0.0;
+
+  Debug.begin();
 }
 
 
@@ -743,6 +746,9 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
 {
   float originalDesiredSpeed_InStepsPerSecond;
   bool limitSwitchFlag;
+
+  int x = 0;
+  Debug.println(x);
   
   
   //
@@ -770,6 +776,8 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
     limitSwitchFlag = false;
     while(!processMovement())
     {
+      x = x + 1;
+      Debug.println(x);
       if (digitalRead(homeLimitSwitchPin) == LOW)
       {
         delay(1);
@@ -986,9 +994,10 @@ bool SpeedyStepper::processMovement(void)
   //
   // check if already at the target position
   //
-  if (currentPosition_InSteps == targetPosition_InSteps)
+  if (currentPosition_InSteps == targetPosition_InSteps) {
+//    Debug.print(x);
     return(true);
-
+  }
   //
   // check if this is the first call to start this new move
   //

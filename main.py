@@ -37,14 +37,14 @@ def run_arduinos():
     # setStepperAcceleration Testing Block
     #  print(a.moveStepperRev([1, 1] + list((4).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepper([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
- 
+
     #   time.sleep(2)
 
     #  print(a.moveStepperHome([1, 1] + list((23).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
-    #   cyprus.setup_servo(1)
+    #  cyprus.setup_servo(1)
     #  while True:
     #       if cyprus.read_gpio() & 0b0001:
     #           sleep(0.05)

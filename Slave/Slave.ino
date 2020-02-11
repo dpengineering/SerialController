@@ -8,8 +8,10 @@
 
 #include "SerialSlave.h"
 #include "SpeedyStepper.h"
+#include "SerialDebug.h"
 
 
+ 
 #define ADDRESS 17
 
 SpeedyStepper stepper1;
@@ -31,7 +33,7 @@ int speedSetting = 500;
 
 void setup() {
   serialSlave.open(115200, ADDRESS, 40);
- // Serial.begin(9600);
+//  Debug.begin();
  // moveStepperHome(1, 1);
 
   stepper1.connectToPort(1);
@@ -57,6 +59,8 @@ void setup() {
   stepper6.connectToPort(6);
   stepper6.setSpeedInStepsPerSecond(500);
   stepper6.setAccelerationInStepsPerSecondPerSecond(500);
+
+  Debug.println("Debug print statements are working");
 
 
 }
