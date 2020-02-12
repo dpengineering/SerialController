@@ -32,8 +32,8 @@ double stepperSetting = .25;
 int speedSetting = 500;
 
 void setup() {
-  serialSlave.open(115200, ADDRESS, 40);
-//  Debug.begin();
+  serialSlave.open(9600, ADDRESS, 40); //baud rate was 115200
+  Serial.begin(9600);
  // moveStepperHome(1, 1);
 
   stepper1.connectToPort(1);
@@ -60,7 +60,7 @@ void setup() {
   stepper6.setSpeedInStepsPerSecond(500);
   stepper6.setAccelerationInStepsPerSecondPerSecond(500);
 
-  Debug.println("Debug print statements are working");
+  Serial.println("Debug print statements are working");
 
 
 }

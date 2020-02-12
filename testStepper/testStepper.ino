@@ -1,6 +1,6 @@
 #include "SpeedyStepper.h"
-//#include "SerialDebug.h"
-// #include "SpeedyStepper.cpp"
+
+
 
 SpeedyStepper stepper1;
 SpeedyStepper stepper2;
@@ -10,7 +10,7 @@ SpeedyStepper stepper5;
 SpeedyStepper stepper6;
 
 void setup() {
-  Serial.begin(9600);
+ // Debug.begin();
 
   pinMode(23, INPUT);
 
@@ -38,7 +38,7 @@ void setup() {
 
   //testStepper();
   //delay(10000);
- // moveStepperHome();
+  //moveStepperHome();
  // delay(10000 * 2);
   disable();
 
@@ -73,7 +73,7 @@ void testStepper() {
 }
 
 void moveStepperHome() {
-  Serial.println("running moveStepperHome");
+  //Debug.println("running moveStepperHome");
   
   int switchPin = 29;
   byte stepper = 1;

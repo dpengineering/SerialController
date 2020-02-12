@@ -747,8 +747,11 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   float originalDesiredSpeed_InStepsPerSecond;
   bool limitSwitchFlag;
 
+
   int x = 0;
-  Debug.println(x);
+  Serial.println(x);
+  pinMode(10, OUTPUT);
+  digitalWrite(10, HIGH);
   
   
   //

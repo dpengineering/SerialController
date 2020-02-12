@@ -14,7 +14,7 @@ import time
 
 RPiMIB.openSPI()
 
-a = Arduino(SerialMaster(baud=115200), 17)
+a = Arduino(SerialMaster(baud=9600), 17)
 # b = Arduino(SerialMaster(baud=115200), 18)
 
 FORMAT_LIST = 0
