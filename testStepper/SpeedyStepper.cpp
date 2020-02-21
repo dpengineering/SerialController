@@ -762,6 +762,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   //
   if (digitalRead(homeLimitSwitchPin) == HIGH)
   {
+    Serial.println("Switch is HIGH (Off)");
     //
     // move toward the home switch
     //
@@ -770,6 +771,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
     limitSwitchFlag = false;
     while(!processMovement())
     {
+      
       if (digitalRead(homeLimitSwitchPin) == LOW)
       {
         delay(1);
@@ -777,6 +779,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
         {
           delay(80);                // allow time for the switch to debounce
           limitSwitchFlag = true;
+          Serial.println("Switch has been pressed");
           break;
         }
       }
@@ -793,6 +796,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   //
   // the switch has been detected, now move away from the switch
   //
+  Serial.println("Switch has been pressed, now moving away from switch");
   setupRelativeMoveInSteps(maxDistanceToMoveInSteps * directionTowardHome * -1);
   limitSwitchFlag = false;
   while(!processMovement())
@@ -804,6 +808,8 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
       {
         delay(80);                // allow time for the switch to debounce
         limitSwitchFlag = true;
+        Serial.println("Switch has been released");
+        
         break;
       }
     }
@@ -831,6 +837,8 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
       {    
         delay(80);                // allow time for the switch to debounce
         limitSwitchFlag = true;
+        Serial.println("Switch has been pressed, Stepper is home.");
+        
         break;
       }
     }
@@ -977,8 +985,11 @@ void SpeedyStepper::setupMoveInSteps(long absolutePositionToMoveToInSteps)
 // if it is time, move one step
 //  Exit:  true returned if movement complete, false returned not a final target position yet
 //
-bool SpeedyStepper::processMovement(void)
-{ 
+bool SpeedyStepper::processMovement(void) {
+
+  pinMode(10, HIGH);
+  digitalWrite(10, HIGH);
+  
   unsigned long currentTime_InUS;
   unsigned long periodSinceLastStep_InUS;
   long distanceToTarget_InSteps;
@@ -986,16 +997,19 @@ bool SpeedyStepper::processMovement(void)
   //
   // check if already at the target position
   //
-  if (currentPosition_InSteps == targetPosition_InSteps)
+  if (currentPosition_InSteps == targetPosition_InSteps) {
+    Serial.println("currentPosition = targetPosition");
     return(true);
-
+  }
   //
   // check if this is the first call to start this new move
   //
   if (startNewMove)
-  {    
+  {
+    Serial.println("startNewMove is true");    
     ramp_LastStepTime_InUS = micros();
     startNewMove = false;
+    Serial.println("startNewMove is false");
   }
     
   //
@@ -1008,21 +1022,29 @@ bool SpeedyStepper::processMovement(void)
   //
   // if it is not time for the next step, return
   //
-  if (periodSinceLastStep_InUS < (unsigned long) ramp_NextStepPeriod_InUS)
-    return(false);
+  if (periodSinceLastStep_InUS < (unsigned long) ramp_NextStepPeriod_InUS) {
+   // Serial.println("it is not time for the next step, returning false");
+    return false;
+  }
+
 
   //
   // determine the distance from the current position to the target
   //
   distanceToTarget_InSteps = targetPosition_InSteps - currentPosition_InSteps;
-  if (distanceToTarget_InSteps < 0) 
+  if (distanceToTarget_InSteps < 0) {
+   //  Serial.println("");
     distanceToTarget_InSteps = -distanceToTarget_InSteps;
+  }
+
 
   //
   // test if it is time to start decelerating, if so change from accelerating to decelerating
   //
-  if (distanceToTarget_InSteps == decelerationDistance_InSteps)
+  if (distanceToTarget_InSteps == decelerationDistance_InSteps) {
+    Serial.println("Time to start decelerating");
     acceleration_InStepsPerUSPerUS = -acceleration_InStepsPerUSPerUS;
+  }
   
   //
   // execute the step on the rising edge

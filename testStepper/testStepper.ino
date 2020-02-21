@@ -1,4 +1,5 @@
 #include "SpeedyStepper.h"
+//#include "SerialDebug.h"
 
 
 
@@ -10,11 +11,11 @@ SpeedyStepper stepper5;
 SpeedyStepper stepper6;
 
 void setup() {
- // Debug.begin();
+  Serial.begin(9600);
 
   pinMode(23, INPUT);
 
-  //Debug.println("Debug print statements are working");
+ // Debug.println("Debug print statements are working");
 
 
   stepper1.connectToPort(1) ;
@@ -38,8 +39,8 @@ void setup() {
 
   //testStepper();
   //delay(10000);
-  //moveStepperHome();
- // delay(10000 * 2);
+  moveStepperHome();
+  delay(10000 * 2);
   disable();
 
 }
@@ -73,8 +74,9 @@ void testStepper() {
 }
 
 void moveStepperHome() {
-  //Debug.println("running moveStepperHome");
-  
+
+  Serial.println("running moveStepperHome");
+
   int switchPin = 29;
   byte stepper = 1;
   long maxDistance = 100000;
@@ -94,10 +96,10 @@ void moveStepperHome() {
    //   Serial.print("This is stepper1.getTargetPos..." );
    //   Serial.println(stepper1.getTargetPositionInSteps());
     //  stepper1.setCurrentPositionInSteps(1);
-      stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+      stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
      // stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-     // stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-     // stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+    //  stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+    //  stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       Serial.println("stepper one");
       break;
     case 2:

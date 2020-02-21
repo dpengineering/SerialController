@@ -159,7 +159,7 @@
 //
 
 #include "SpeedyStepper.h"
-#include "SerialDebug.h"
+//#include "SerialDebug.h"
 
 // ---------------------------------------------------------------------------------
 //                                  Setup functions 
@@ -211,7 +211,7 @@ SpeedyStepper::SpeedyStepper()
   acceleration_InStepsPerSecondPerSecond = 200.0;
   currentStepPeriod_InUS = 0.0;
 
-  Debug.begin();
+//  Debug.begin();
 }
 
 
@@ -779,8 +779,9 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
     limitSwitchFlag = false;
     while(!processMovement())
     {
+      //digitalWrite(10, LOW);
       x = x + 1;
-      Debug.println(x);
+//      Debug.println(x);
       if (digitalRead(homeLimitSwitchPin) == LOW)
       {
         delay(1);
