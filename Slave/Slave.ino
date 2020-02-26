@@ -60,13 +60,13 @@ void setup() {
   stepper6.setSpeedInStepsPerSecond(500);
   stepper6.setAccelerationInStepsPerSecondPerSecond(500);
 
-  Serial.println("Debug print statements are working");
+  //Serial.println("Debug print statements are working");
 
 
 }
 
 void loop() {
-/*
+
   if (stepper1.processMovement() && running1) {
     stepper1.disableStepper();
     running1 = false;
@@ -96,7 +96,7 @@ void loop() {
     stepper6.disableStepper();
     running6 = false;
   }
-  */
+  
 }
 
   Func moveStepper;
@@ -115,6 +115,7 @@ Callable callables[] = {
   {"setStepperSpeed", setStepperSpeed},
   {"setStepperAccel", setStepperAccel}
 };
+
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 

@@ -27,7 +27,7 @@
 // This library can generate a maximum of about 12,500 steps per second using an 
 // Arduino Uno.  Assuming a system driving only one motor at a time, in full step 
 // mode, with a 200 steps per rotation motor, the maximum speed is about 62 RPS 
-// or 3750 RPM (most stepper motor can not go this fast).  Driving one motor in 
+// or 3750 RPM (most stepper motors can not go this fast).  Driving one motor in 
 // half step mode, a maximum speed of 31 RPS or 1875 RPM can be reached.  In 
 // quarter step mode about 15 RPS or 937 RPM.  Running multiple motors at the same
 // time will reduce the maximum speed.  For example running two motors will reduce
@@ -159,7 +159,6 @@
 //
 
 #include "SpeedyStepper.h"
-//#include "SerialDebug.h"
 
 // ---------------------------------------------------------------------------------
 //                                  Setup functions 
@@ -210,8 +209,6 @@ SpeedyStepper::SpeedyStepper()
   desiredSpeed_InStepsPerSecond = 200.0;
   acceleration_InStepsPerSecondPerSecond = 200.0;
   currentStepPeriod_InUS = 0.0;
-
-//  Debug.begin();
 }
 
 
@@ -746,14 +743,13 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
 {
   float originalDesiredSpeed_InStepsPerSecond;
   bool limitSwitchFlag;
-
-
-  int x = 0;
-  Serial.println(x);
-  pinMode(10, OUTPUT);
-  digitalWrite(10, HIGH);
   
-  
+  Serial.println("Running moveToHomeInSteps");
+  Serial.println(directionTowardHome);
+  Serial.println(speedInStepsPerSecond);
+  Serial.println(maxDistanceToMoveInSteps);
+  Serial.println(homeLimitSwitchPin);
+
   //
   // setup the home switch input pin
   //
@@ -771,6 +767,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   //
   if (digitalRead(homeLimitSwitchPin) == HIGH)
   {
+    
     //
     // move toward the home switch
     //
@@ -779,9 +776,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
     limitSwitchFlag = false;
     while(!processMovement())
     {
-      //digitalWrite(10, LOW);
-      x = x + 1;
-//      Debug.println(x);
+      Serial.println("Switch is HIGH (Off)");
       if (digitalRead(homeLimitSwitchPin) == LOW)
       {
         delay(1);
@@ -789,6 +784,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
         {
           delay(80);                // allow time for the switch to debounce
           limitSwitchFlag = true;
+          Serial.println("Switch has been pressed, now moving away from switch");
           break;
         }
       }
@@ -805,6 +801,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   //
   // the switch has been detected, now move away from the switch
   //
+
   setupRelativeMoveInSteps(maxDistanceToMoveInSteps * directionTowardHome * -1);
   limitSwitchFlag = false;
   while(!processMovement())
@@ -816,6 +813,8 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
       {
         delay(80);                // allow time for the switch to debounce
         limitSwitchFlag = true;
+        Serial.println("Switch has been released, now moving towards switch");
+        
         break;
       }
     }
@@ -831,6 +830,7 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   //
   // have now moved off the switch, move toward it again but slower
   //
+  
   setSpeedInStepsPerSecond(speedInStepsPerSecond/8);
   setupRelativeMoveInSteps(maxDistanceToMoveInSteps * directionTowardHome);
   limitSwitchFlag = false;
@@ -843,6 +843,8 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
       {    
         delay(80);                // allow time for the switch to debounce
         limitSwitchFlag = true;
+        Serial.println("Switch has been pressed, Stepper is home.");
+        
         break;
       }
     }
@@ -989,8 +991,11 @@ void SpeedyStepper::setupMoveInSteps(long absolutePositionToMoveToInSteps)
 // if it is time, move one step
 //  Exit:  true returned if movement complete, false returned not a final target position yet
 //
-bool SpeedyStepper::processMovement(void)
-{ 
+bool SpeedyStepper::processMovement(void) {
+
+  pinMode(10, HIGH);
+  digitalWrite(10, HIGH);
+  
   unsigned long currentTime_InUS;
   unsigned long periodSinceLastStep_InUS;
   long distanceToTarget_InSteps;
@@ -999,18 +1004,20 @@ bool SpeedyStepper::processMovement(void)
   // check if already at the target position
   //
   if (currentPosition_InSteps == targetPosition_InSteps) {
-//    Debug.print(x);
+   // Serial.println("currentPosition = targetPosition");
     return(true);
   }
   //
-  // check if this is the first call to start this new move
+  // check if this is the first call to start this new move ??
   //
   if (startNewMove)
-  {    
+  {
+    Serial.println("startNewMove is true");    
     ramp_LastStepTime_InUS = micros();
     startNewMove = false;
+    Serial.println("startNewMove is false");
   }
-    
+  //Serial.println("Running function");
   //
   // determine how much time has elapsed since the last step (Note 1: this method works  
   // even if the time has wrapped. Note 2: all variables must be unsigned)
@@ -1021,21 +1028,31 @@ bool SpeedyStepper::processMovement(void)
   //
   // if it is not time for the next step, return
   //
-  if (periodSinceLastStep_InUS < (unsigned long) ramp_NextStepPeriod_InUS)
-    return(false);
+  if (periodSinceLastStep_InUS < (unsigned long) ramp_NextStepPeriod_InUS) {
+   // Serial.println("it is not time for the next step, returning false");
+    return false;
+  }
+  //Serial.println("Still running function");
 
   //
   // determine the distance from the current position to the target
   //
   distanceToTarget_InSteps = targetPosition_InSteps - currentPosition_InSteps;
-  if (distanceToTarget_InSteps < 0) 
+  if (distanceToTarget_InSteps < 0) {
+   //  Serial.println("Direction");
     distanceToTarget_InSteps = -distanceToTarget_InSteps;
+  }
+
 
   //
   // test if it is time to start decelerating, if so change from accelerating to decelerating
   //
-  if (distanceToTarget_InSteps == decelerationDistance_InSteps)
+  if (distanceToTarget_InSteps == decelerationDistance_InSteps) {
+    Serial.println("Time to start decelerating");
     acceleration_InStepsPerUSPerUS = -acceleration_InStepsPerUSPerUS;
+  }
+  //Never thinks it is time to decelerate??
+  //Serial.println("Still Running Function");
   
   //
   // execute the step on the rising edge
@@ -1082,10 +1099,13 @@ bool SpeedyStepper::processMovement(void)
   if (currentPosition_InSteps == targetPosition_InSteps)
   {
     currentStepPeriod_InUS = 0.0;
+    Serial.println("Has reached Home!");
     return(true);
   }
-    
+  digitalWrite(10, LOW);
+  //delay(100);
   return(false);
+
 }
 
 
