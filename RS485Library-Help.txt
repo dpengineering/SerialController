@@ -183,9 +183,9 @@ void moveStepperToPos(byte dataLength, byte *dataArray) {
 
 void moveStepperDeg(byte dataLength, byte *dataArray) {
 
-    Description: This function rotates the stepper, in degrees.
+    Description: This function rotates the stepper in degrees.
 
-    An example of how to call the function in the py file would be:
+    An example of calling this function in the py file would be:
 
     print(a.moveStepperDeg([1, 1] + list((360).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
@@ -205,14 +205,26 @@ void moveStepperRev(byte dataLength, byte *dataArray) {
     moveStepperRev works much the same way that moveStepperDeg does. The only difference is that the list
     parameter takes the number of revolutions to rotate the stepper by, and that the number must be an integer value.
     This means that you cannot run 2.5 revolutions. (To do that, use moveStepper or moveStepperDeg).
+
+    We have found that moveStepperRev works well for testing if the communication between the Pi and the Arduinos
+    is working, as it is a hard-to-miss workability function. (Easy to see if the function is working properly or not,
+    just count the rotations to ensure they are the same). This is helpful because sometimes the stepper settings can be
+    different than expected, and these differences are easy to see with counting rotations. With a function such as moveToPos
+    or moveStepperDeg or setStepperSpeed or setStepperAccel, it is not visually easy to see.
 }
 
-testStepper
+testStepper -- An Arduino script written in order to debug functions
 
-testStepper is an Arduino file created in order to isolate functions from the Pi, in order to check the Arduino functions themselves.
+testStepper is an Arduino script created in order to isolate functions from the Pi, in order to check the Arduino functions themselves.
 Copy and paste your function into testStepper, and call it at the end of the setup file. This way you can check
 if there is a problem with the function itself, or with the communication between the Pi and the Arduino, or the callables,
 or some other factor.
 
 For example, when we were debugging moveStepperHome(), we copy/pasted the entire function into the testStepper file (which
 uses no callables for simplicity) and analyzed our problem from there.
+
+The SpeedyStepper.cpp file has function definitions inside it. Most of the functions work by using or calling a
+separate processMovement function. However, the moveStepperToHome works by calling processMovement within itself, and so
+it is setup differently than the other functions. It actually calls the processMovement function three times, but
+each time is just another check for if the stepper is actually home or not. There must be some way to make processMovement
+work when called from the function inside itself, in order to make the function call from the Pi work properly.

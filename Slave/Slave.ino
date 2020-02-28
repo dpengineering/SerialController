@@ -66,7 +66,7 @@ void setup() {
 }
 
 void loop() {
-
+/*
   if (stepper1.processMovement() && running1) {
     stepper1.disableStepper();
     running1 = false;
@@ -96,11 +96,12 @@ void loop() {
     stepper6.disableStepper();
     running6 = false;
   }
-  
+  */
 }
 
   Func moveStepper;
   Func stopStepper;
+  Func moveStepperHome;
 
 
 Callable callables[] = {
@@ -120,6 +121,8 @@ Callable callables[] = {
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 
 void moveStepperHome(byte dataLength, byte *dataArray) {
+
+  Serial.println("running moveStepperHome");
 
   /*
 
@@ -148,7 +151,7 @@ void moveStepperHome(byte dataLength, byte *dataArray) {
   
   switch (stepper) {
     case 1:
-     // Serial.println("Stepper One Case");
+      Serial.println("Stepper One Case");
       stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
       break;
     case 2:

@@ -14,7 +14,7 @@
 // This driver is used to control one or more stepper motors and requires stepper 
 // interface boards that have a Step and Direction interface.  The motors are 
 // accelerated and decelerated as they travel to the final position.
-//
+// 
 // A limitation of this driver is that once a motion starts, you can NOT change the 
 // target position, speed or rate of acceleration until the motion has completed.  
 // The only exception to this is that you can issue a "Stop" at any point in time,
@@ -743,6 +743,8 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
 {
   float originalDesiredSpeed_InStepsPerSecond;
   bool limitSwitchFlag;
+
+  bool SwitchProperty = digitalRead(homeLimitSwitchPin);
     
   
   Serial.println("Running moveToHomeInSteps");
@@ -775,11 +777,13 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
       
       if (digitalRead(homeLimitSwitchPin) == LOW)
       {
-        Serial.println(limitSwitchFlag);
+        bool SwitchProperty = digitalRead(homeLimitSwitchPin);
+        Serial.println(SwitchProperty);
         delay(1);
         if (digitalRead(homeLimitSwitchPin) == LOW)
         {
-          Serial.println(limitSwitchFlag);
+          bool SwitchProperty = digitalRead(homeLimitSwitchPin);
+          Serial.println(SwitchProperty);
           delay(80);                // allow time for the switch to debounce
           limitSwitchFlag = true;
           Serial.println("Switch has been pressed, now moving away from switch");
@@ -806,11 +810,13 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   {
     if (digitalRead(homeLimitSwitchPin) == HIGH)
     {
-      Serial.println(limitSwitchFlag);
+      bool SwitchProperty = digitalRead(homeLimitSwitchPin);
+      Serial.println(SwitchProperty);
       delay(1);
       if (digitalRead(homeLimitSwitchPin) == HIGH)
       {
-        Serial.println(limitSwitchFlag);
+        bool SwitchProperty = digitalRead(homeLimitSwitchPin);
+        Serial.println(SwitchProperty);
         delay(80);                // allow time for the switch to debounce
         limitSwitchFlag = true;
         Serial.println("Switch has been released, now moving towards switch");
@@ -838,11 +844,13 @@ bool SpeedyStepper::moveToHomeInSteps(long directionTowardHome, float speedInSte
   {
     if (digitalRead(homeLimitSwitchPin) == LOW)
     {
-      Serial.println(limitSwitchFlag);
+      bool SwitchProperty = digitalRead(homeLimitSwitchPin);
+      Serial.println(SwitchProperty);
       delay(1);
       if (digitalRead(homeLimitSwitchPin) == LOW)
       {
-        Serial.println(limitSwitchFlag);    
+        bool SwitchProperty = digitalRead(homeLimitSwitchPin);
+        Serial.println(SwitchProperty);    
         delay(80);                // allow time for the switch to debounce
         limitSwitchFlag = true;
         Serial.println("Switch has been pressed, Stepper is home.");
