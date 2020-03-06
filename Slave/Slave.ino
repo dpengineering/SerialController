@@ -106,6 +106,7 @@ void loop() {
 
     moveStepperHomeBool = false;
     Serial.println("moveStepperHomeBool is false");
+    //seems to be false for a split second?
 
     //moveStepperHomeDataArray[4] = 7;
   }
