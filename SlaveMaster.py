@@ -1,4 +1,3 @@
-
 #      ******************************************************************
 #      *                                                                *
 #      *                 Header file for SlaveMaster.py                 *
@@ -12,6 +11,7 @@ from threading import Thread
 from time import time, sleep
 from pidev.SlaveMaster import SerialMaster
 from pidev.SlaveMaster import Arduino
+
 ADDRESS = 15
 
 # create connection
@@ -42,7 +42,7 @@ READ_FAILURE = 0
 READ_SUCCESS_NO_DATA = 1
 READ_SUCCESS_DATA = 2
 
-SEND_ATTEMPTS = 3
+SEND_ATTEMPTS = 50
 
 """
 From slave:
@@ -87,7 +87,7 @@ class SlaveMaster:
             # uh oh. failure!
             # print("non-matching response codes", response_type_first, response_type_repeat)
             self.read_byte()
-            #return READ_FAILURE
+            # return READ_FAILURE
 
         if response_type_repeat == SLAVE_RESPONSE_RECIEVED_COMMAND:
             self.data_length_from_slave = 0
@@ -238,4 +238,3 @@ class Arduino:
         print("There are", self.callable_count, "callables")
         for i in range(len(self.callables), self.callable_count):
             self.add_callable(Callable(self, i))
-

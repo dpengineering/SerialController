@@ -28,6 +28,8 @@ bool running3 = false;
 bool running4 = false;
 bool running5 = false;
 bool running6 = false;
+bool moveStepperHomeBool = false;
+byte* moveStepperHomeDataArray;
 double stepperSetting = .25;
 int speedSetting = 500;
 
@@ -66,7 +68,48 @@ void setup() {
 }
 
 void loop() {
-/*
+
+  if (moveStepperHomeBool) {
+
+    Serial.println("moveStepperHomeBool is true");
+
+
+    long dir = moveStepperHomeDataArray[0];
+    float spd = moveStepperHomeDataArray[1];
+    long maxDistance = 10000;
+    int switchPin = moveStepperHomeDataArray[3];
+
+    switch (moveStepperHomeDataArray[4]) {
+      case 1:
+        Serial.println("Stepper One Case");
+        stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        break;
+      case 2:
+        stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        break;
+      case 3:
+        stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        break;
+      case 4:
+        stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        break;
+      case 5:
+        stepper5.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        break;
+      case 6:
+        stepper6.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        break;
+      case 7:
+        break;
+  }
+
+
+    moveStepperHomeBool = false;
+    Serial.println("moveStepperHomeBool is false");
+
+    //moveStepperHomeDataArray[4] = 7;
+  }
+
   if (stepper1.processMovement() && running1) {
     stepper1.disableStepper();
     running1 = false;
@@ -96,12 +139,12 @@ void loop() {
     stepper6.disableStepper();
     running6 = false;
   }
-  */
+  
 }
 
   Func moveStepper;
   Func stopStepper;
-  Func moveStepperHome;
+  //Func moveStepperHome;
 
 
 Callable callables[] = {
@@ -117,64 +160,17 @@ Callable callables[] = {
   {"setStepperAccel", setStepperAccel}
 };
 
-
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 
 void moveStepperHome(byte dataLength, byte *dataArray) {
 
+  moveStepperHomeBool = true; 
+
+  moveStepperHomeDataArray = dataArray;
+
   Serial.println("running moveStepperHome");
+  Serial.println(dataLength);
 
-  /*
-
-  int switchPin = ((int *) (dataArray + 2))[0]; //list parameter must be switch pin
-  byte stepper = dataArray[0]; //first parameter is port
-  long maxDistance = 10000;
-  long dir = dataArray[1]; //second parameter is direction
-  float spd = 500;
- // float spd = (float)speedSetting;
-  if (dir == 0) {
-    dir = -1;
-  }
-*/
-
-  // variables hard-coded:
-
-  int switchPin = 29;
-  byte stepper = 1;
-  long maxDistance = 100000;
-  long dir = 1;
-  float spd = 500;
-  if (dir == 0)
-    dir = -1;
-    
-
-  
-  switch (stepper) {
-    case 1:
-      Serial.println("Stepper One Case");
-      stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-      break;
-    case 2:
-     // Serial.println("Stepper Two Case");
-      stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-      break;
-    case 3:
-     // Serial.println("Stepper Three Case");
-      stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-      break;
-    case 4:
-   //   Serial.println("Stepper Four Case");
-      stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-      break;
-    case 5:
-   //   Serial.println("Stepper Five Case");
-      stepper5.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-      break;
-    case 6:
-    //  Serial.println("Stepper Six Case");
-      stepper6.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
-      break;
-  }
 }
 
 void moveStepper(byte dataLength, byte *dataArray) {

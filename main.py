@@ -24,25 +24,30 @@ NO_RESPONSE = 3
 
 
 def run_arduinos():
-    #  print(a.setStepperSpeed([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.setStepperSpeed([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.setStepperSpeed([2, 1] + list((1000).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.setStepperSpeed([3, 1] + list((1500).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     # moveStepperToPos Testing Block
 
-    # print(a.moveStepperToPos([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING)) 
+    # print(a.moveStepperToPos([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
     # print(a.moveStepperToPos([2, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
     # print(a.moveStepperToPos([3, 1] + list((300).to_bytes(2, "little")), format_out=FORMAT_STRING))
     # print(a.moveStepperToPos([4, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
     # print(a.moveStepperToPos([5, 1] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     # setStepperAcceleration Testing Block
-    # print(a.moveStepperRev([1, 1] + list((4).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    # print(a.moveStepperRev([1, 1] + list((50).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    # print(a.moveStepperRev([2, 1] + list((50).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    # print(a.moveStepperRev([3, 1] + list((50).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepper([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     #   time.sleep(2)
 
-    #  print(a.moveStepperHome([1, 1] + list((23).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.moveStepperHome([1, 255, 255, 29, 2], format_out=FORMAT_STRING))
+    # print(a.moveStepperHome([1, 255, 255, 29, 2], format_out=FORMAT_STRING))
 
-    print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    # print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     #  cyprus.setup_servo(1)
     #  while True:
