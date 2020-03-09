@@ -36,7 +36,7 @@ int speedSetting = 500;
 void setup() {
   serialSlave.open(9600, ADDRESS, 40); //baud rate was 115200
   Serial.begin(9600);
- // moveStepperHome(1, 1);
+  Serial.println("testing that Serial is working");
 
   stepper1.connectToPort(1);
   stepper1.setSpeedInStepsPerSecond(500);
@@ -103,8 +103,10 @@ void loop() {
         break;
   }
 
-
+  while (1 < 2) {
     moveStepperHomeBool = false;
+  }
+
     Serial.println("moveStepperHomeBool is false");
     //seems to be false for a split second?
 

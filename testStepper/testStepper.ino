@@ -39,8 +39,8 @@ void setup() {
 
   //testStepper();
   //delay(10000);
-  moveStepperHome();
-  delay(10000 * 2);
+  //moveStepperHome();
+  //delay(10000 * 2);
   disable();
 
 }
