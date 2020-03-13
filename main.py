@@ -24,8 +24,9 @@ NO_RESPONSE = 3
 
 
 def run_arduinos():
+    print("running run_arduinos")
     print(a.setStepperSpeed([1, 1] + list((500).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    print(a.setStepperSpeed([2, 1] + list((1000).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    print(a.setStepperSpeed([2, 1] + list((2000).to_bytes(2, "little")), format_out=FORMAT_STRING))
     print(a.setStepperSpeed([3, 1] + list((1500).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     # moveStepperToPos Testing Block
@@ -38,14 +39,40 @@ def run_arduinos():
 
     # setStepperAcceleration Testing Block
     # print(a.moveStepperRev([1, 1] + list((50).to_bytes(2, "little")), format_out=FORMAT_STRING))
-    # print(a.moveStepperRev([2, 1] + list((50).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    # print(a.moveStepperRev([2, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+    # print(a.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
     # print(a.moveStepperRev([3, 1] + list((50).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #  print(a.moveStepper([1, 1] + list((800).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
     #   time.sleep(2)
 
-    print(a.moveStepperHome([1, 255, 255, 29, 2], format_out=FORMAT_STRING))
+
+
+    # time.sleep(10)
+
+    # if a.isStepperHome([0, 0] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING):
+    #   print(a.moveStepperHome([1, 255, 255, 29, 1], format_out=FORMAT_STRING))
+
+    print(a.moveStepperHome([1, 255, 255, 29, 1], format_out=FORMAT_STRING))
+
+    print("moveStepperHome is running")
+
+    time.sleep(10)
+
+    print("10 seconds has passed")
+
+    if a.isStepperHome([0, 0] + list((0).to_bytes(2, "little")), format_out=FORMAT_STRING):
+        print("Stepper is Home!")
+
+    # print(a.moveStepperHome([1, 255, 255, 29, 1], format_out=FORMAT_STRING))
+
+    # print(a.setStepperSpeed([2, 1] + list((2000).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
     # print(a.moveStepperHome([1, 255, 255, 29, 2], format_out=FORMAT_STRING))
+
+    # time.sleep(15)
+
+    # print(a.moveStepperHome([1, 255, 255, 29, 1], format_out=FORMAT_STRING))
 
     # print(a.moveStepperHome([1, 1] + list((29).to_bytes(2, "little")), format_out=FORMAT_STRING))
 
@@ -65,9 +92,26 @@ def run_arduinos():
     #   print(a.moveStepper([2, 0] + list((200).to_bytes(2, "little")), format_out=FORMAT_STRING))
     #   time.sleep(3);
 
-    time.sleep(60)
+    print("40 second timer started until disable")
+
+    time.sleep(40)
 
     print(a.disable(format_out=FORMAT_STRING))
 
 
+def testFunction():
+    print("running testFunction")
+
+    print(a.moveStepperRev([1, 1] + list((1).to_bytes(2, "little")), format_out=FORMAT_STRING))
+
+    print(a.moveStepperHome([1, 255, 255, 29, 1], format_out=FORMAT_STRING))
+
+    time.sleep(10)
+
+    print(a.disable(format_out=FORMAT_STRING))
+
+
+# testFunction()
+# print("completed testFunction")
 run_arduinos()
+print("completed run_arduinos")

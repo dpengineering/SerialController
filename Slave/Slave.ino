@@ -29,6 +29,7 @@ bool running4 = false;
 bool running5 = false;
 bool running6 = false;
 bool moveStepperHomeBool = false;
+bool stepperIsHomeBool = false; 
 byte* moveStepperHomeDataArray;
 double stepperSetting = .25;
 int speedSetting = 500;
@@ -36,7 +37,7 @@ int speedSetting = 500;
 void setup() {
   serialSlave.open(9600, ADDRESS, 40); //baud rate was 115200
   Serial.begin(9600);
-  Serial.println("testing that Serial is working");
+  //Serial.println("testing that Serial is working");
 
   stepper1.connectToPort(1);
   stepper1.setSpeedInStepsPerSecond(500);
@@ -74,15 +75,21 @@ void loop() {
     Serial.println("moveStepperHomeBool is true");
 
 
-    long dir = moveStepperHomeDataArray[0];
-    float spd = moveStepperHomeDataArray[1];
-    long maxDistance = 10000;
-    int switchPin = moveStepperHomeDataArray[3];
+    long dir = moveStepperHomeDataArray[0]; // direction
+    float spd = moveStepperHomeDataArray[1]; //* 10;  //speed, times 10
+    Serial.println("Speed is: ");
+    Serial.print(spd);
+    long maxDistance = 10000; //dataArray index
+    int switchPin = moveStepperHomeDataArray[3]; //pin number of switch
+    int stepperNumber = moveStepperHomeDataArray[4]; //stepper
 
-    switch (moveStepperHomeDataArray[4]) {
-      case 1:
+    switch (stepperNumber) {
+      case 1: 
         Serial.println("Stepper One Case");
         stepper1.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        //stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        //stepper3.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
+        //stepper4.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
         break;
       case 2:
         stepper2.moveToHomeInSteps(dir, spd, maxDistance, switchPin);
@@ -103,44 +110,63 @@ void loop() {
         break;
   }
 
-  while (1 < 2) {
+  int x = 0;
+  x = x + 1;
+/*
+  while (1 < 100) {
     moveStepperHomeBool = false;
   }
+*/
 
-    Serial.println("moveStepperHomeBool is false");
+  moveStepperHomeBool = false;
+  Serial.println("moveStepperHomeBool is false");
+  stepperIsHomeBool = true;
+
     //seems to be false for a split second?
 
     //moveStepperHomeDataArray[4] = 7;
   }
 
-  if (stepper1.processMovement() && running1) {
-    stepper1.disableStepper();
-    running1 = false;
+  if (running1) {
+    if (stepper1.processMovement() && running1) {
+      stepper1.disableStepper();
+      running1 = false;
+    }
   }
 
-  if (stepper2.processMovement() && running1) {
-    stepper2.disableStepper();
-    running2 = false;
+  if (running2) {
+    if (stepper2.processMovement() && running1) {
+      stepper2.disableStepper();
+      running2 = false;
+    }
   }
 
-  if (stepper3.processMovement() && running1) {
-    stepper3.disableStepper();
-    running3 = false;
+  if (running3) {
+    if (stepper3.processMovement() && running1) {
+      stepper3.disableStepper();
+      running3 = false;
+    }
   }
 
-  if (stepper4.processMovement() && running1) {
-    stepper4.disableStepper();
-    running4 = false;
+  if (running4) {
+    if (stepper4.processMovement() && running1) {
+      stepper4.disableStepper();
+      running4 = false;
+    }
   }
 
-  if (stepper5.processMovement() && running1) {
-    stepper5.disableStepper();
-    running5 = false;
+  if (running5) {
+    if (stepper5.processMovement() && running1) {
+      stepper5.disableStepper();
+      running5 = false;
+    }
   }
 
-  if (stepper6.processMovement() && running1) {
-    stepper6.disableStepper();
-    running6 = false;
+  if (running6) {
+    if (stepper6.processMovement() && running1) {
+      stepper6.disableStepper();
+      running6 = false;
+    }
   }
   
 }
@@ -160,19 +186,33 @@ Callable callables[] = {
   {"moveStepperRev", moveStepperRev},
   {"moveStepperHome", moveStepperHome},
   {"setStepperSpeed", setStepperSpeed},
-  {"setStepperAccel", setStepperAccel}
+  {"setStepperAccel", setStepperAccel},
+  {"isStepperHome", isStepperHome}
 };
 
 byte numberOfExternalCallables = sizeof(callables) / sizeof(Callable);
 
 void moveStepperHome(byte dataLength, byte *dataArray) {
 
-  moveStepperHomeBool = true; 
+  moveStepperHomeBool = true;
 
   moveStepperHomeDataArray = dataArray;
 
   Serial.println("running moveStepperHome");
   Serial.println(dataLength);
+
+}
+
+void isStepperHome(byte dataLength, byte *dataArray) {
+
+  if (stepperIsHomeBool) {
+    Serial.print("Stepper is Home");
+    return true;
+  }
+  else {
+    Serial.println("Stepper is not Home");
+    return false;
+  }
 
 }
 
